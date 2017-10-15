@@ -6,6 +6,15 @@
 
 
 
+## Collaborators
+
+- Katie Goines  ([katiegoines](https://github.com/katiegoines))
+- Cole Herzer ([coleherzer](https://github.com/coleherzer))
+- Philip Karz  ([philipkarz](https://github.com/philipkarz))
+- Jason Rouse  ([jrrouse88](https://github.com/jrrouse88))
+
+ 
+
 ## Technologies Used
 
 *(including outside APIs)*
