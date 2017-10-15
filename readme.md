@@ -6,23 +6,23 @@
 
 
 
-### Technologies Used
+## Technologies Used
 
 *(including outside APIs)*
 
 
 
-### Approach Taken
+## Approach Taken
 
 #### Division of Tasks
 
 
 
-### Installation Instructions
+## Installation Instructions
 
 
 
-### Planning Documentation
+## Planning Documentation
 
 User Stories: https://trello.com/b/nZnU8Mt8/project-3-tripply
 
@@ -34,15 +34,15 @@ Presentation Deck:
 
 
 
-### Unresolved Problems & Major Hurdles
+## Unresolved Problems & Major Hurdles
 
 
 
-### Future Features
+## Future Features
 
 
 
-### Technical Requirements
+## Technical Requirements
 
 Your **team** must:
 
