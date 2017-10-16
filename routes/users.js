@@ -2,12 +2,13 @@ const
     express = require('express'),
     passport = require('passport'),
     usersRouter = new express.Router()
-    User = require('..models/User.js')
+    User = require('../models/User.js')
 
 
     usersRouter.route('/login')
     .get((req, res) => {
-        res.render('login', {message: req.flash('loginMessage')})
+        res.render('login')
+        //, {message: req.flash('loginMessage')}
     })
     .post(passport.authenticate('local-login', {
         successRedirect: '/profile',

@@ -10,6 +10,7 @@ const
     usersRoutes = require('./routes/users.js'),
     PORT = 3000,
     passport = require('passport'),
+    flash = require('connect-flash'),
     passportConfig = require('./config/passport.js')
 
 mongoose.connect(mongoDBURL, (err) => {
@@ -21,6 +22,7 @@ app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(ejsLayouts)
 app.use(bodyParser.urlencoded())
+app.use(flash())
 app.use(express.static(`${__dirname}/public`))
 
 app.use(passport.initialize())
