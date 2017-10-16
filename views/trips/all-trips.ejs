@@ -1,1 +1,14 @@
 <h1>All Trips</h1>
+<ul>
+        
+        <% trips.forEach(function(t) { %>
+           <li>
+            <%= t.locale %>
+            <%= t.name %> <%= t.user.name %>
+            <%= t.length %>
+            <%= t.rating %>
+            <a href="/trips/<%= t.id %>">See Details</a>
+            
+         </li>
+       <% }) %>
+    </ul>
