@@ -7,12 +7,11 @@ const
 
 usersRouter.route('/login')
     .get((req, res) => {
-        res.render('login')
-        //, {message: req.flash('loginMessage')}
+        res.render('login'), {message: req.flash('loginMessage')}
     })
     .post(passport.authenticate('local-login', {
         successRedirect: '/users/profile',
-        failureRedirect: '/login'
+        failureRedirect: '/users/login'
     }))
 
 usersRouter.route('/signup')
@@ -21,7 +20,7 @@ usersRouter.route('/signup')
     })
     .post(passport.authenticate('local-signup', {
         successRedirect: '/users/profile',
-        failureRedirect: '/signup'
+        failureRedirect: '/users/signup'
     }))
 
 usersRouter.get('/profile', isLoggedIn, (req, res) => {
