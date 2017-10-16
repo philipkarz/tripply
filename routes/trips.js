@@ -8,7 +8,7 @@ tripsRouter.route('/')
     .get((req, res) => {
         Trip.find({}, (err, trips) => {
             //res.json(trips)
-            res.render('../views/home', {trips:trips })
+            res.render('../views/trips/all-trips', {trips:trips })
         })
     })
 
@@ -23,6 +23,7 @@ tripsRouter.route('/:id')
     .get((req, res) => {
         Trip.findById(req.params.id, (err, trip) => {
             res.json(trip)
+            res.render('../views/trips/trip')
         })
     })
 
