@@ -28,7 +28,7 @@ app.use(passport.session())
 
 app.get('/', (req, res) => {
     //res.render({message: "The root."})
-    res.render('../views/home'}
+    res.render('../views/home')
 })
 
 app.use('/trips', tripsRoutes)
