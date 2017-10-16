@@ -23,9 +23,16 @@ usersRouter.route('/signup')
         failureRedirect: '/users/signup'
     }))
 
-usersRouter.get('/profile', isLoggedIn, (req, res) => {
-    res.render('profile', {user: req.user})
-})
+usersRouter.route('/profile') 
+    .get(isLoggedIn, (req, res) => {
+        res.render('profile', {user: req.user})
+    })
+    .delete(isLoggedIn, (req, res) => {
+        User.findByIdAndRemove(user._id, (err, user) => {
+            if (err) return console.log(err)
+            req.logout()
+        })
+    })
 
 usersRouter.get('/logout', (req, res) => {
     // destroy the session, redirect back home
@@ -54,14 +61,14 @@ usersRouter.route('/:id')
 
     })
 
-    .delete((req, res) => {
-        User.findByIdAndRemove(req.params.id, (err, user) => {
-            if(err) return console.log(err)
-            res.json({
-                success: true,
-                message: 'User Deleted'
-            })
-        })
-    })
+    // .delete((req, res) => {
+    //     User.findByIdAndRemove(req.params.id, (err, user) => {
+    //         if(err) return console.log(err)
+    //         res.json({
+    //             success: true,
+    //             message: 'User Deleted'
+    //         })
+    //     })
+    // })
 })
 module.exports = usersRouter
