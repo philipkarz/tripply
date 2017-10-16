@@ -54,8 +54,11 @@ usersRouter.route('/:id')
     .delete((req, res) => {
         User.findByIdAndRemove(req.params.id, (err, user) => {
             if(err) return console.log(err)
-            res.json(user)
+            res.json({
+                success: true,
+                message: 'Album deleted'
             })
         })
+    })
 })
 module.exports = usersRouter
