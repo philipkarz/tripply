@@ -16,5 +16,10 @@
   "bugs": {
     "url": "https://github.com/katiegoines/tripply/issues"
   },
-  "homepage": "https://github.com/katiegoines/tripply#readme"
+  "homepage": "https://github.com/katiegoines/tripply#readme",
+  "dependencies": {
+    "body-parser": "^1.18.2",
+    "express": "^4.16.2",
+    "mongoose": "4.10.8"
+  }
 }
