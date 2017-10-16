@@ -5,6 +5,7 @@ const
     app = express(),
     bodyParser = require('body-parser'),
     mongoDBURL = 'mongodb://localhost/tripply',
+    ejsLayouts = require('express-ejs-layouts'),
     PORT = 3000
 
 mongoose.connect(mongoDBURL, (err) => {
@@ -13,6 +14,7 @@ mongoose.connect(mongoDBURL, (err) => {
 
 app.use(logger('dev'))
 app.use(bodyParser.json())
+app.use(ejsLayouts)
 app.use(bodyParser.urlencoded())
 
 app.get('/', (req, res) => {
