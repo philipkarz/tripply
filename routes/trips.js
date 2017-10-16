@@ -7,7 +7,8 @@ const
 tripsRouter.route('/')
     .get((req, res) => {
         Trip.find({}, (err, trips) => {
-            res.json(trips)
+            //res.json(trips)
+            res.render('../views/home')
         })
     })
 
