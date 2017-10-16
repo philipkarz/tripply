@@ -15,6 +15,10 @@ app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(bodyParser.urlencoded())
 
+app.get('/', (req, res) => {
+    res.json({message: "The root."})
+})
+
 app.listen(PORT, (err) => {
     console.log(err || `Server connected on port ${PORT}`)
 })
