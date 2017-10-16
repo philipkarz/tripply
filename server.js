@@ -13,7 +13,8 @@ const
     MongoDBStore = require('connect-mongodb-session')(session),
     flash = require('connect-flash'),
     passport = require('passport'),
-    passportConfig = require('./config/passport.js')
+    passportConfig = require('./config/passport.js'), 
+    methodOverride = require('method-override')
 
 const
     PORT = process.env.PORT || 3000,
@@ -36,6 +37,7 @@ app.use(ejsLayouts)
 app.use(bodyParser.urlencoded())
 app.use(flash())
 app.use(express.static(`${__dirname}/public`))
+app.use(methodOverride('_method'))
 
 app.use(session({
     secret: 'ssshhhhhh',
