@@ -20,7 +20,7 @@ usersRouter.route('/signup')
         res.render('signup')
     })
     .post(passport.authenticate('local-signup', {
-        successRedirect: '/profile',
+        successRedirect: '/users/profile',
         failureRedirect: '/signup'
     }))
 
