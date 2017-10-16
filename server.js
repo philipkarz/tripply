@@ -12,10 +12,12 @@ mongoose.connect(mongoDBURL, (err) => {
     console.log(err || 'Connected to MongoDB')
 })
 
+app.set('view engine', 'ejs')
 app.use(logger('dev'))
 app.use(bodyParser.json())
 app.use(ejsLayouts)
 app.use(bodyParser.urlencoded())
+app.use(express.static(`${__dirname}/public`))
 
 app.get('/', (req, res) => {
     res.json({message: "The root."})
