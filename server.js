@@ -6,6 +6,7 @@ const
     bodyParser = require('body-parser'),
     mongoDBURL = 'mongodb://localhost/tripply',
     ejsLayouts = require('express-ejs-layouts'),
+    tripsRoutes = require('./routes/trips.js')
     PORT = 3000
 
 mongoose.connect(mongoDBURL, (err) => {
@@ -22,6 +23,8 @@ app.use(express.static(`${__dirname}/public`))
 app.get('/', (req, res) => {
     res.json({message: "The root."})
 })
+
+app.use('/trips', tripsRoutes)
 
 app.listen(PORT, (err) => {
     console.log(err || `Server connected on port ${PORT}`)
