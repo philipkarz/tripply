@@ -11,7 +11,7 @@ const
     PORT = 3000,
     passport = require('passport'),
     flash = require('connect-flash'),
-    passportConfig = require('./config/passport.js'),
+    passportConfig = require('./config/passport.js')
 
 mongoose.connect(mongoDBURL, (err) => {
     console.log(err || 'Connected to MongoDB')
