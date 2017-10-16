@@ -5,35 +5,38 @@ const
     User = require('..models/User.js')
 
 
-
-
-
-usersRouter.route('/signup')
+    usersRouter.route('/login')
     .get((req, res) => {
-
+        res.render('login', {message: req.flash('loginMessage')})
     })
-    .post((req, res) => {
-
-    })
-
-usersRouter.route('/login')
+    .post(passport.authenticate('local-login', {
+        successRedirect: '/profile',
+        failureRedirect: '/login'
+    }))
+    
+    usersRouter.route('/signup')
     .get((req, res) => {
-
+        res.render('signup')
     })
-    .post((req, res) => {
-
+    .post(passport.authenticate('local-signup', {
+        successRedirect: '/profile',
+        failureRedirect: '/signup'
+    }))
+    
+    usersRouter.get('/profile', isLoggedIn, (req, res) => {
+    res.render('profile', {user: req.user})
     })
-
-usersRouter.route('/profile')
-    .get((req, res) => {
-
+    
+    usersRouter.get('/logout', (req, res) => {
+    // destroy the session, redirect back home
+    req.logout()
+    res.redirect('/')
     })
-
-usersRouter.route('/logout')
-    .get((req, res) => {
-
-    })
-
+    
+    function isLoggedIn(req, res, next) {
+    if(req.isAuthenticated()) return next()
+    res.redirect('/')
+    }
 
 usersRouter.route('/:id')
     .patch((req, res) => {
@@ -56,7 +59,7 @@ usersRouter.route('/:id')
             if(err) return console.log(err)
             res.json({
                 success: true,
-                message: 'Album deleted'
+                message: 'User Deleted'
             })
         })
     })
