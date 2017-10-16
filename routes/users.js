@@ -1,6 +1,6 @@
 const
-    express = require('express')
-    passport = require('passport')
+    express = require('express'),
+    passport = require('passport'),
     usersRouter = new express.Router()
 
 usersRouter.route('/signup')
