@@ -5,17 +5,17 @@ const
     User = require('../models/User.js')
 
 
-    usersRouter.route('/login')
+usersRouter.route('/login')
     .get((req, res) => {
         res.render('login')
         //, {message: req.flash('loginMessage')}
     })
     .post(passport.authenticate('local-login', {
-        successRedirect: '/profile',
+        successRedirect: '/users/profile',
         failureRedirect: '/login'
     }))
-    
-    usersRouter.route('/signup')
+
+usersRouter.route('/signup')
     .get((req, res) => {
         res.render('signup')
     })
@@ -23,21 +23,21 @@ const
         successRedirect: '/profile',
         failureRedirect: '/signup'
     }))
-    
-    usersRouter.get('/profile', isLoggedIn, (req, res) => {
+
+usersRouter.get('/profile', isLoggedIn, (req, res) => {
     res.render('profile', {user: req.user})
-    })
-    
-    usersRouter.get('/logout', (req, res) => {
+})
+
+usersRouter.get('/logout', (req, res) => {
     // destroy the session, redirect back home
     req.logout()
     res.redirect('/')
-    })
-    
-    function isLoggedIn(req, res, next) {
-    if(req.isAuthenticated()) return next()
-    res.redirect('/')
-    }
+})
+
+function isLoggedIn(req, res, next) {
+if(req.isAuthenticated()) return next()
+res.redirect('/')
+}
 
 usersRouter.route('/:id')
     .patch((req, res) => {
