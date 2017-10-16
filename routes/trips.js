@@ -11,9 +11,11 @@ tripsRouter.route('/')
         })
     })
     .post((req, res) => {
-        Trip.create(req.body, (err, trip) => {
-            res.json({success: true, message:"trip created"})
-        })
+
+    })
+.tripsRouter.route('/:id')
+    .get((req, res) => {
+
     })
     .patch((req, res) => {
 
