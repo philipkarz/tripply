@@ -11,7 +11,7 @@ usersRouter.route('/login')
         //, {message: req.flash('loginMessage')}
     })
     .post(passport.authenticate('local-login', {
-        successRedirect: '/profile',
+        successRedirect: '/users/profile',
         failureRedirect: '/login'
     }))
 
