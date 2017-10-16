@@ -5,6 +5,14 @@ const
     User = require('../models/User.js')
 
 
+usersRouter.route('/')
+    .get((req, res) => {
+        User.find({}, (err, users) => {
+            //res.json(trips)
+            res.json(users)
+        })
+    })
+
 usersRouter.route('/login')
     .get((req, res) => {
         res.render('login'), {message: req.flash('loginMessage')}
@@ -18,6 +26,7 @@ usersRouter.route('/signup')
     .get((req, res) => {
         res.render('signup')
     })
+
     .post(passport.authenticate('local-signup', {
         successRedirect: '/users/profile',
         failureRedirect: '/users/signup'
@@ -26,11 +35,24 @@ usersRouter.route('/signup')
 usersRouter.route('/profile') 
     .get(isLoggedIn, (req, res) => {
         res.render('profile', {user: req.user})
+        //console.log(req.user._id)
     })
+
     .delete(isLoggedIn, (req, res) => {
-        User.findByIdAndRemove(user._id, (err, user) => {
+        console.log(req.user)
+        User.findByIdAndRemove(req.user._id, (err, user) => {
             if (err) return console.log(err)
             req.logout()
+            res.redirect('/')
+        })
+    })
+
+usersRouter.route('/profile/edit')
+    .get((req, res) => {
+        User.findById(req.user._id, (err, user) => {
+            if(err) return console.log(err)
+            console.log(req.user)
+            res.render('../views/users/edit', {user:user})
         })
     })
 
