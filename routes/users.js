@@ -43,11 +43,11 @@ usersRouter.route('/profile')
         console.log(userId)
     })
     
-    .post(isLoggedIn, (req, res) => {
+    .patch(isLoggedIn, (req, res) => {
         // console.log(req.body)
         
         User.findByIdAndUpdate(req.user._id, req.body, {new:true}, (err, updatedUser) => {
-            res.render('profile', {user: updatedUser})
+            res.redirect('/users/profile')
          })
     })
 
