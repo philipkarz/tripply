@@ -51,7 +51,7 @@ usersRouter.route('/profile')
          })
     })
 
-    .post((req, res) => { // need to add isLoggedIn when we can test with a form rather than Postman
+    .post(isLoggedIn, (req, res) => { // need to add isLoggedIn when we can test with a form rather than Postman
         //console.log(req)
         var newTrip = new Trip(req.body)
         newTrip.user = userId
@@ -105,14 +105,5 @@ usersRouter.route('/:id')
 
     })
 
-    // .delete((req, res) => {
-    //     User.findByIdAndRemove(req.params.id, (err, user) => {
-    //         if(err) return console.log(err)
-    //         res.json({
-    //             success: true,
-    //             message: 'User Deleted'
-    //         })
-    //     })
-    // })
 })
 module.exports = usersRouter
