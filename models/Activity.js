@@ -1,7 +1,10 @@
 const 
 mongoose = require('mongoose')
 activitySchema = new mongoose.Schema({
-    address: {type: String, required: true},
+    place: {type: String, required: true},
+    date: {type: String, required: true},
+    time: {type: String, required: true},
+    description: String,
     rating: Number,
     trip: {type: mongoose.Schema.Types.ObjectId, ref: 'Trip'},
     user: {type: mongoose.Schema.Types.ObjectId, ref: 'User'},
