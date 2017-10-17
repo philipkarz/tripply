@@ -48,8 +48,7 @@ usersRouter.route('/profile')
         var newTrip = new Trip(req.body)
         newTrip.user = userId
         newTrip.save((err, trip) => {
-            res.json({success:true, message:"Trip created", trip:trip})
-        })
+            res.redirect(`/trips/${trip._id}`)        })
     })
 
     .delete(isLoggedIn, (req, res) => {
