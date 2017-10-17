@@ -2,6 +2,6 @@
 
 <% for(var i = 0; i < trips.length; i ++) { %>
     <ul>
-        <li><%= trips[i].name %> - <%= trips[i].locale %> (user: <%= trips[i].user %>) </li>
+        <li><a href="/trips/<%= trips[i]._id %>"><%= trips[i].name %></a> - <%= trips[i].locale %> (user: <%= trips[i].user %>) </li>
     </ul>
 <% } %>

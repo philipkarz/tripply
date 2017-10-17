@@ -15,8 +15,8 @@ tripsRouter.route('/')
 tripsRouter.route('/:id')
     .get((req, res) => {
         Trip.findById(req.params.id, (err, trip) => {
-            res.json(trip)
-            res.render('../views/trips/trip')
+            //res.json(trip)
+            res.render('../views/trips/trip', {trip:trip})
         })
     })
 
