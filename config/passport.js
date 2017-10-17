@@ -21,28 +21,34 @@ passport.use('local-signup', new localStrategy({
     usernameField: 'email',
     // value for password will be password
     passwordField: 'password',
+    // passwordConfirmationField: 'passwordConfirmation',
     // pass request body to callback function
     passReqToCallback: true
     // request cycle function
 }, (req, email, password, done) => {
-    // search for a user by an email
-    User.findOne({email: email}, (err, user) => {
-        // if could not connect to server return the error
-        if (err) return done(err)
-        // if inputed email is already in use, return false
-        if(user) return done(null, false, req.flash('signupMessage', 'There was an error signing up, please double check that all your information is correct!'))
-        // create a new user 
-        var newUser = new User(req.body)
-        // use bcrypt to generate the password hash
-        newUser.password = newUser.generateHash(password)
-        // save the user function
-        newUser.save((err) => {
-            // if we couldn't save, console log the error
-            if (err) return console.log(err)
-            // if save successful, return the newUser
-            return done(null, newUser)
+    // if (password === passwordConfirmation) {
+        // search for a user by an email
+        User.findOne({email: email}, (err, user) => {
+            // if could not connect to server return the error
+            if (err) return done(err)
+            // if inputed email is already in use, return false
+            if(user || (password !== req.body.passwordConfirmation)) return done(null, false, req.flash('signupMessage', 'There was an error signing up, please double check that all your information is correct!'))
+            // create a new user 
+            var newUser = new User(req.body)
+            // use bcrypt to generate the password hash
+            newUser.password = newUser.generateHash(password)
+            // save the user function
+            newUser.save((err) => {
+                // if we couldn't save, console log the error
+                if (err) return console.log(err)
+                // if save successful, return the newUser
+                return done(null, newUser)
+            })
         })
-    })
+    // }
+    // else {
+    //     //  return done(null,false, req.flash('passwordMessage', 'Passwords do not match'))
+    // }
 }))
 
 
