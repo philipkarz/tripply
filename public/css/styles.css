@@ -1,3 +1,4 @@
+/* Styles for the profile.ejs page */
 .profile {
     margin-top: 2rem; 
 }
@@ -21,4 +22,18 @@
 
 .trip-button {
     margin-top: 1rem; 
+}
+
+/* Styles for the trip.ejs page */
+.trip-page {
+    margin-top: 2rem; 
+}
+
+.day {
+    border: 1px solid black;
+    border-radius: 6px; 
+}
+
+.activities {
+    margin-left: 4rem; 
 }
