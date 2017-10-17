@@ -1,4 +1,4 @@
-<h1>Edit Profile</h1>
+<h1>Edit <%= user.name %>'s Profile</h1>
 
 
 
@@ -22,6 +22,8 @@
               
     </form>
 </br>
-    <form method="delete" action="/users/profile">
+    <form method="post" action="/users/profile?_method=DELETE">
         <button type="submit" class="btn btn-danger" id="delete">Delete User</button>
     </form>
+
+    <!-- <button type="submit" class="btn btn-danger" id="delete-btn">Delete User</button> -->
