@@ -48,7 +48,7 @@ usersRouter.route('/profile')
         newTrip.user = req.user._id
         console.log(newTrip)
         newTrip.save((err, trip) => {
-            res.redirect('/users/profile')
+            res.redirect(`/trips/${trip._id}`)
         })
     })
 
