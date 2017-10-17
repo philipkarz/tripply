@@ -1,5 +1,10 @@
-<h1><%= user.name %>'s Profile Page</h1>
+<div class='container profile'>
+    <div class='row'>
+        <div class='col-8'>
+            <h1><%= user.name %>'s Tripply Page</h1>
+        </div>
 
+<<<<<<< HEAD
 <ul>
 trips: <%for (var i = 0; i < trips.length; i++) { %>
     <li><%= trips[i].name %> - <%= trips[i].locale %> </li>
@@ -10,3 +15,33 @@ trips: <%for (var i = 0; i < trips.length; i++) { %>
     <button type="submit" id="update">Edit Profile</button>
 </form>
 
+=======
+        <div class='col-4'>
+            <button class='new-trip-button'>
+                <h3>Create a new trip</h3>                
+            </button>
+        </div>
+    </div>
+    <div class='row trip'>
+        <% trips.forEach(function(t) { %>
+                <div class='col-4 trip-name'>
+                    <h6> Trip Name: <%= t.name %> </h6>
+                </div>
+                <div class='col-4 trip-loc'>
+                    <h6> Location: <%= t.locale %> </h6>
+                </div>
+                <div class='col-3 trip-des'>
+                    <p>Description: <%= t.description %></p>
+                </div>
+                <div class='col-1 trip-button'>
+                    <button>
+                        <p>...</p>
+                    </button>
+                </div>
+        <% }) %> 
+    </div>
+    <form action="/users/profile/edit">
+        <button type="submit" id="update">Edit Profile</button>
+    </form>	
+</div>
+>>>>>>> 6f17b451780f3c93235c2974261e34af1b3c6e93
