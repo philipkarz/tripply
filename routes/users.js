@@ -2,9 +2,9 @@ const
     express = require('express'),
     passport = require('passport'),
     usersRouter = new express.Router()
-    User = require('../models/User.js')
-
-
+    User = require('../models/User.js'),
+    Trip = require('../models/Trip.js')
+    
 usersRouter.route('/')
     .get((req, res) => {
         User.find({}, (err, users) => {
@@ -32,10 +32,24 @@ usersRouter.route('/signup')
         failureRedirect: '/users/signup'
     }))
 
+var userId
 usersRouter.route('/profile') 
     .get(isLoggedIn, (req, res) => {
-        res.render('profile', {user: req.user})
-        //console.log(req.user._id)
+        Trip.find({user: req.user._id}, (err, trips) => {
+            res.render('profile', {user: req.user, trips:trips})
+            userId = req.user._id
+        })
+        userId = req.user._id
+        console.log(userId)
+    })
+
+    .post((req, res) => { // need to add isLoggedIn when we can test with a form rather than Postman
+        //console.log(req)
+        var newTrip = new Trip(req.body)
+        newTrip.user = userId
+        newTrip.save((err, trip) => {
+            res.json({success:true, message:"Trip created", trip:trip})
+        })
     })
 
     .delete(isLoggedIn, (req, res) => {

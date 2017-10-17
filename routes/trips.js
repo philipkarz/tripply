@@ -12,11 +12,12 @@ tripsRouter.route('/')
         })
     })
 
-    .post((req, res) => {
-        Trip.create(req.body, (err, trip) => {
-            res.json({success: true, message:"trip created", trip:trip})
-        })
-    })
+    // .post((req, res) => {
+    //     console.log(req)
+    //     Trip.create(req.body, (err, trip) => {
+    //         res.json({success: true, message:"trip created", trip:trip})
+    //     })
+    // })
 
 
 tripsRouter.route('/:id')
