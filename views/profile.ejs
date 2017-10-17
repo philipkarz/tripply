@@ -17,7 +17,7 @@
     <div class='row trip'>
         <% trips.forEach(function(t) { %>
                 <div class='col-4 trip-name'>
-                    <h6> Trip Name: <%= t.name %> </h6>
+                    <h6> Trip Name: <a href="/trips/<%= t._id %>"><%= t.name %></a> </h6>
                 </div>
                 <div class='col-4 trip-loc'>
                     <h6> Location: <%= t.locale %> </h6>
