@@ -37,6 +37,13 @@ usersRouter.route('/profile')
         res.render('profile', {user: req.user})
         //console.log(req.user._id)
     })
+    .post(isLoggedIn, (req, res) => {
+        console.log(req.body)
+        
+        User.findByIdAndUpdate(req.user._id, req.body, {new:true}, (err, updatedUser) => {
+            res.render('profile', {user: updatedUser})
+         })
+    })
 
     .delete(isLoggedIn, (req, res) => {
         console.log(req.user)
