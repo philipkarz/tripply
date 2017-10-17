@@ -1,59 +1,89 @@
-<h1><%= user.name %>'s Profile Page</h1>
-
-<ul>
-trips: <%for (var i = 0; i < trips.length; i++) { %>
-    <li><%= trips[i].name %> - <%= trips[i].locale %> </li>
-    <% } %>
-</ul>
+<div class='container profile'>
+  <div class='row'>
+    <div class='col-8'>
+      <h1><%= user.name %>'s Tripply Page</h1>
+</div>
 
 <form action="/users/profile/edit">
   <button type="submit" id="update">Edit Profile</button>
 </form>
 
-<button type="button" class="btn btn-primary" data-toggle="modal" data-target="#exampleModal">
-  Create Trip
-</button>
+
+<div class='col-4'>
+  <button type="button" class='new-trip-button btn btn-primary' data-toggle="modal" data-target="#exampleModal">
+    <h3>Create a new trip</h3>                
+  </button>
+</div>
+</div>
+    <div class='row trip'>
+        <% trips.forEach(function(t) { %>
+                <div class='col-4 trip-name'>
+                    <h6> Trip Name: <%= t.name %> </h6>
+                </div>
+                <div class='col-4 trip-loc'>
+                    <h6> Location: <%= t.locale %> </h6>
+                </div>
+                <div class='col-3 trip-des'>
+                    <p>Description: <%= t.description %></p>
+                </div>
+                <div class='col-1 trip-button'>
+                    <button>
+                        <p>...</p>
+                    </button>
+                </div>
+        <% }) %> 
+    </div>
+    <form action="/users/profile/edit">
+        <button type="submit" id="update">Edit Profile</button>
+    </form>	
+</div>
 
 <div class="modal fade" id="exampleModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-  <div class="modal-dialog" role="document">
-    <div class="modal-content">
-      <div class="modal-header">
-        <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
-        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-          <span aria-hidden="true">&times;</span>
-        </button>
-      </div>
-      <div class="modal-body">
-        <form action="/user/profile" method="POST">
-          <div class="form-group">
-            <label for="name">Trip Name</label>
-            <input type="text" class="form-control" name="name">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content">
+        <div class="modal-header">
+          <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+          <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+            <span aria-hidden="true">&times;</span>
+          </button>
         </div>
-          <div class="form-group">
-            <label for="length">Trip Length</label>
-            <input type="number" class="form-control" name="length">
+        <div class="modal-body">
+          <form action="/users/profile" method="POST">
+            <div class="form-group">
+              <label for="name">Trip Name</label>
+              <input type="text" class="form-control" name="name">
+          </div>
+            <div class="form-group">
+              <label for="length">Trip Length</label>
+              <input type="number" class="form-control" name="length">
+          </div>
+            <div class="form-group">
+              <label for="local">Trip Location</label>
+              <input type="text" class="form-control" name="locale">
+          </div>
+            <div class="form-group">
+              <label for="description">Trip Description</label>
+              <input type="textarea" class="form-control" name="description">
+          </div>
+          <button id="submit" type="submit" class="btn btn-primary">Add Trip</button>
+          </form>
         </div>
-          <div class="form-group">
-            <label for="local">Trip Location</label>
-            <input type="text" class="form-control" name="locale">
+        <div class="modal-footer">
+          <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
         </div>
-        </form>
-      </div>
-      <div class="modal-footer">
-        <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-        <button id="submit" type="submit" class="btn btn-primary">Add Trip</button>
       </div>
     </div>
   </div>
-</div>
 
 <script>
-  var newTrip = new Trip
-  console.log(newTrip)
-  $('#submit').on('click', (evt) => {
+  $('#submit').on('submit', (evt) => {
     console.log('you clicked something')
-    newTrip.user = req.user._id
-    /*var formData = {
+    //var newTrip = new Trip(req.body)
+    //newTrip.user = req.user._id
+    //newTrip.save((err, trip) => {
+      //console.log(trip)
+    //})
+    var formData = {
       "name": $('input[name=name').val(),
       "length": $('input[name=length').val(),
       "locale": $('input[name=locale').val()
@@ -66,7 +96,7 @@ trips: <%for (var i = 0; i < trips.length; i++) { %>
     })
     .done((data) => {
       console.log(data)
-    })*/
+    })
     evt.preventDefault()
-  })
-</script>
+    })
+  </script>

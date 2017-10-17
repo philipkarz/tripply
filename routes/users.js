@@ -43,12 +43,12 @@ usersRouter.route('/profile')
         console.log(userId)
     })
 
-    .post((isLoggedIn, req, res) => { // need to add isLoggedIn when we can test with a form rather than Postman
-        //console.log(req)
-        var newTrip = new Trip(req.body)
-        newTrip.user = userId
+    .post(isLoggedIn, (req, res) => { // need to add isLoggedIn when we can test with a form rather than Postman
+        newTrip = new Trip(req.body)
+        newTrip.user = req.user._id
+        console.log(newTrip)
         newTrip.save((err, trip) => {
-            res.json({success:true, message:"Trip created", trip:trip})
+            res.redirect('/users/profile')
         })
     })
 
