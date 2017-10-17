@@ -42,6 +42,14 @@ usersRouter.route('/profile')
         userId = req.user._id
         console.log(userId)
     })
+    
+    .patch(isLoggedIn, (req, res) => {
+        // console.log(req.body)
+        
+        User.findByIdAndUpdate(req.user._id, req.body, {new:true}, (err, updatedUser) => {
+            res.redirect('/users/profile')
+         })
+    })
 
     .post(isLoggedIn, (req, res) => { // need to add isLoggedIn when we can test with a form rather than Postman
         newTrip = new Trip(req.body)
