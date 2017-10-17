@@ -1,7 +1,10 @@
 <h1><%= user.name %>'s Profile Page</h1>
 
-<h1>trips: <%= trips %></h1>
-
+<ul>
+trips: <%for (var i = 0; i < trips.length; i++) { %>
+    <li><%= trips[i].name %> - <%= trips[i].locale %> </li>
+    <% } %>
+</ul>
 
 <form action="/users/profile/edit">
     <button type="submit" id="update">Edit Profile</button>
