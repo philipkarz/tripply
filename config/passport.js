@@ -30,7 +30,7 @@ passport.use('local-signup', new localStrategy({
         // if could not connect to server return the error
         if (err) return done(err)
         // if inputed email is already in use, return false
-        if(user) return done(null, false)
+        if(user) return done(null, false, req.flash('signupMessage', 'There was an error signing up, please double check that all your information is correct!'))
         // create a new user 
         var newUser = new User(req.body)
         // use bcrypt to generate the password hash
