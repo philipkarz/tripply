@@ -12,13 +12,6 @@ tripsRouter.route('/')
         })
     })
 
-    .post((req, res) => {
-        Trip.create(req.body, (err, trip) => {
-            res.json({success: true, message:"trip created", trip:trip})
-        })
-    })
-
-
 tripsRouter.route('/:id')
     .get((req, res) => {
         Trip.findById(req.params.id, (err, trip) => {

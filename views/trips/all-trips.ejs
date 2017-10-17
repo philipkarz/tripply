@@ -1,1 +1,7 @@
 <h1>All Trips</h1>
+
+<% for(var i = 0; i < trips.length; i ++) { %>
+    <ul>
+        <li><%= trips[i].name %> - <%= trips[i].locale %> (user: <%= trips[i].user %>) </li>
+    </ul>
+<% } %>
