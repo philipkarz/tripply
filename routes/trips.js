@@ -48,14 +48,7 @@ tripsRouter.route('/:id')
     })
     
 
-//Activity
-    tripsRouter.route('/:id/activity')
-    // .get((req, res) => {
-    //     Activity.findById(req.params.id, (err, trip) => {
-    //         //res.json(trip)
-    //         res.render('../views/trips/trip', {activity:activity})
-    //     })
-    // })
+
     .post((req, res) => {
         var newActivity = new Activity(req.body)
         newActivity.trip = req.params.id
