@@ -1,4 +1,5 @@
 const
+    dotenv = require('dotenv').load(),
     express = require('express'),
     logger = require('morgan'),
     mongoose = require('mongoose'),
@@ -14,7 +15,10 @@ const
     flash = require('connect-flash'),
     passport = require('passport'),
     passportConfig = require('./config/passport.js'), 
-    methodOverride = require('method-override')
+    methodOverride = require('method-override'),
+    yelp = require('yelp-fusion'),
+    clientId = process.env.CLIENT_ID,
+    clientSecret = process.env.CLIENT_SECRET
 
 const
     PORT = process.env.PORT || 3000,
@@ -60,6 +64,22 @@ app.get('/', (req, res) => {
     //res.render({message: "The root."})
     res.render('../views/home')
 })
+
+app.get('/search', (req, res) => {
+    yelp.accessToken(clientId, clientSecret).then(response => {
+        const client = yelp.client(response.jsonBody.access_token)
+        client.search({
+            term: req.query.term,
+            location: req.query.location
+        }).then(response => {
+            console.log(response.jsonBody.businesses);
+            res.json(response.jsonBody.businesses)
+            // res.render('../views/try', {results: response.jsonBody.businesses})
+        })
+    }).catch(e => {
+        console.log(e);
+    });
+    })
 
 app.use('/trips', tripsRoutes)
 app.use('/users', usersRoutes)
