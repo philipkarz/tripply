@@ -52,7 +52,9 @@ tripsRouter.route('/:id')
         newActivity.trip = req.params.id
         newActivity.user = req.user
         newActivity.save((err, activity) => {
-            res.json({success: true, message: "Activity created!", activity})
+            console.log(req.params.id)
+            res.redirect(`/trips/${req.params.id}`)
+            //res.json({success: true, message: "Activity created!", activity})
         })
     })
 
