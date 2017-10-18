@@ -26,9 +26,7 @@
                       <p>...</p>
                   </button></a>
               </div>
-              <!-- <form action="`/trips/{trip:id}/edit`">
-                <button type="submit" id="update">Edit Trip</button>
-            </form>	 -->
+             
       <% }) %> 
   </div>
   <form action="/users/profile/edit">
@@ -76,11 +74,6 @@
 <script>
 $('#submit').on('submit', (evt) => {
   console.log('you clicked something')
-  //var newTrip = new Trip(req.body)
-  //newTrip.user = req.user._id
-  //newTrip.save((err, trip) => {
-    //console.log(trip)
-  //})
   var formData = {
     "name": $('input[name=name').val(),
     "length": $('input[name=length').val(),

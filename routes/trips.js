@@ -42,9 +42,9 @@ tripsRouter.route('/:id')
 
     tripsRouter.route('/:id/activity')
     .get((req, res) => {
-        Trip.findById(req.params.id, (err, trip) => {
-            //res.json(trip)
-            res.render('../views/trips/trip', {trip:trip})
+        Activity.find({}, (err, activities) => {
+            res.json(activities)
+            // res.render('../views/trips/all-trips', {trips:trips })
         })
     })
     .post((req, res) => {
