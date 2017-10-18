@@ -3,54 +3,15 @@
         <div class='col-8'>
             <h1><%= trip.name %></h1>
         </div>
-<<<<<<< HEAD
-        <a class="btn btn-info" href="/trips/<%= trip._id %>/edit">Edit Trip</a>	
-      </div>
-        <div class='col-4'>
-            <button class='new-activity-button'>
-                <h3>Add Activity</h3>                
-            </button>
+        <div class='col-8'>
+        <a class='btn btn-info' href='/trips/<%= trip._id %>/edit'>Edit Trip</a>
         </div>
-    </div>
-    <!-- need to change the below section to be a div for each DAY
-    In that day we want to see the name of each activity with the time (as list items)
-    And a button that displays a modal of the activity details on click -->
-    <div class='row day'>
-        
-        <% activities.forEach(function(a) { %>
-            <div class='col-12'>
-                    <h3>Date: <%= a.date %></h3>
-                </div>
-            <div class='row activities'>
-                <div class='col-4 activity-name'>
-                    <h6>Place: <%= a.place %></h6>
-                </div>
-                <div class='col-4 activity-time'>
-                    <h6>Time: <%= a.time %></h6>
-                </div>
-                <div class='col-2'>
-
-                </div>
-                <div class='col-1 activity-button'>
-                    <button class="btn btn-primary">
-                        <p>See Details</p>
-                    </button>
-                </div>
-            </div>
-        <% }) %>
-        
-        <!-- <%// }) %>  -->
-    </div>
-    <!-- <form action="/users/profile/edit">
-        <button type="submit" id="update">Edit Profile</button>
-    </form>	
-</div> -->
-=======
     <div class='col-4'>
         <button class='new-activity-button'>
             <h3>Add Activity</h3>                
         </button>
     </div>
+    
 </div>
 <!-- need to change the below section to be a div for each DAY
 In that day we want to see the name of each activity with the time (as list items)
@@ -82,7 +43,6 @@ And a button that displays a modal of the activity details on click -->
 <button type="submit" id="update">Edit Profile</button>
 </form>	
 </div>
->>>>>>> 104d8272c913cbc7feb0896b3cf41e7f38b2d457
 
 <div class="modal fade" id="newActivityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
@@ -107,44 +67,6 @@ And a button that displays a modal of the activity details on click -->
                         <label for="local">Time</label>
                         <input type="text" class="form-control" name="time">
                     </div>
-<<<<<<< HEAD
-                  </div>
-                </div>
-              </div>
-        
-        
-              <script>
-
-var $newActivityBtn = $('.new-activity-button')
-$newActivityBtn.on('click', function() {
-    $('#newActivityModal').modal()
-})
-
-    var $newActivityForm = $('#new-activity-form')
-    $newActivityForm.on('submit', (evt) => {
-        evt.preventDefault()
-        var formData = {
-            "place": $('input[name=place').val(),
-            "date": $('input[name=date').val(),
-            "time": $('input[name=time').val(),
-            "description": $('input[name=description').val()
-        }
-        $.ajax({
-            url: '/trips/<%= trip._id %>/activity',
-            method: 'POST',
-            data: JSON.stringify(formData),
-            contentType: 'application/json'
-        })
-        .done((data) => {
-            console.log(data)
-            $('#newActivityModal').modal('hide')
-
-        })
-        
-        })
-
-    </script>
-=======
                     <div class="form-group">
                         <label for="description">Description</label>
                         <input type="textarea" class="form-control" name="description">
@@ -230,5 +152,4 @@ $newActivityBtn.on('click', function() {
     })
 })
 </script>
->>>>>>> 104d8272c913cbc7feb0896b3cf41e7f38b2d457
 
