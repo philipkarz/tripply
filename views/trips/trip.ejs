@@ -132,6 +132,7 @@ And a button that displays a modal of the activity details on click -->
         $('#newActivityModal').modal()
     })
     var $newActivityForm = $('#new-activity-form')
+    //on click ajax post request 
     $newActivityForm.on('submit', (evt) => {
         evt.preventDefault()
     var formData = {
@@ -148,6 +149,9 @@ And a button that displays a modal of the activity details on click -->
     })
     .done((data) => {
         console.log(data)
+        //after activity is saved, make new ajax request to get all trip activities
+        //receive the response, console log it to make sure itsright
+        //in callback of results, call a function that appends results where they shoud be
         $('#newActivityModal').modal('hide')
     })
 })
