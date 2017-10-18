@@ -65,7 +65,7 @@ app.get('/', (req, res) => {
     res.render('../views/home')
 })
 
-app.get('/try', (req, res) => {
+app.get('/search', (req, res) => {
     yelp.accessToken(clientId, clientSecret).then(response => {
         const client = yelp.client(response.jsonBody.access_token)
         client.search({
