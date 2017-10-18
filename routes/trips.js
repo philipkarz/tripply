@@ -38,17 +38,15 @@ tripsRouter.route('/:id')
             res.redirect('/users/profile')
         })
     })
-
-    tripsRouter.route('/:id/edit')
-    .get((req, res) => {
-        Trip.findById(req.params.id, (err, trip) => {
-            if(err) return console.log(err)
-            res.render('../views/trips/edit', {trip:trip})
-        })
-    })
     
 
-
+    tripsRouter.route('/:id/activity')
+    .get((req, res) => {
+        Trip.findById(req.params.id, (err, trip) => {
+            //res.json(trip)
+            res.render('../views/trips/trip', {trip:trip})
+        })
+    })
     .post((req, res) => {
         var newActivity = new Activity(req.body)
         newActivity.trip = req.params.id
@@ -70,4 +68,18 @@ tripsRouter.route('/:id')
         })
     })
 
+tripsRouter.get('/:tripId/activities/:activityId', (req, res) => {
+    Activity.findById(req.params.activityId, (err, activity) => {
+        res.json(activity)
+    })
+}) 
+
+tripsRouter.route('/:id/edit')
+.get((req, res) => {
+    Trip.findById(req.params.id, (err, trip) => {
+        if(err) return console.log(err)
+        res.render('../views/trips/edit', {trip:trip})
+    })
+})
+    
 module.exports = tripsRouter
