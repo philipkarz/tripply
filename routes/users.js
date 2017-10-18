@@ -70,7 +70,7 @@ usersRouter.route('/profile')
     })
 
 usersRouter.route('/profile/edit')
-    .get((req, res) => {
+    .get(isLoggedIn, (req, res) => {
         User.findById(req.user._id, (err, user) => {
             if(err) return console.log(err)
             console.log(req.user)
@@ -104,15 +104,5 @@ usersRouter.route('/:id')
         })
 
     })
-
-    // .delete((req, res) => {
-    //     User.findByIdAndRemove(req.params.id, (err, user) => {
-    //         if(err) return console.log(err)
-    //         res.json({
-    //             success: true,
-    //             message: 'User Deleted'
-    //         })
-    //     })
-    // })
 })
 module.exports = usersRouter

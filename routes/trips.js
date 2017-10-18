@@ -22,26 +22,40 @@ tripsRouter.route('/:id')
             //res.json(trip)
         })
     })
-
     .patch((req, res) => {
-        Trip.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedTrip) => {
-            res.json(updatedTrip)
+        Trip.findById(req.params.id, (err, trip) => {
+            trip = Object.assign(trip, req.body)
+            trip.save((err, updatedTrip) => {
+                if(err) return console.log(err)
+                res.redirect('/users/profile')
+            })
+
         })
     })
 
     .delete((req, res) => {
         Trip.findByIdAndRemove(req.params.id, (err, deletedTrip) => {
-            res.json({success: true, message: `${deletedTrip.name} has been deleted.`})
+            res.redirect('/users/profile')
         })
     })
 
-    tripsRouter.route('/:id/activity')
+    tripsRouter.route('/:id/edit')
     .get((req, res) => {
         Trip.findById(req.params.id, (err, trip) => {
-            //res.json(trip)
-            res.render('../views/trips/trip', {trip:trip})
+            if(err) return console.log(err)
+            res.render('../views/trips/edit', {trip:trip})
         })
     })
+    
+
+//Activity
+    tripsRouter.route('/:id/activity')
+    // .get((req, res) => {
+    //     Activity.findById(req.params.id, (err, trip) => {
+    //         //res.json(trip)
+    //         res.render('../views/trips/trip', {activity:activity})
+    //     })
+    // })
     .post((req, res) => {
         var newActivity = new Activity(req.body)
         newActivity.trip = req.params.id
@@ -52,14 +66,14 @@ tripsRouter.route('/:id')
     })
 
     .patch((req, res) => {
-        Trip.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedTrip) => {
-            res.json(updatedTrip)
+        Activity.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedActivity) => {
+            res.json(updatedActivity)
         })
     })
 
     .delete((req, res) => {
-        Trip.findByIdAndRemove(req.params.id, (err, deletedTrip) => {
-            res.json({success: true, message: `${deletedTrip.name} has been deleted.`})
+        Activity.findByIdAndRemove(req.params.id, (err, deletedActivity) => {
+            res.json({success: true, message: `${deletedActivity.place} has been deleted.`})
         })
     })
 
