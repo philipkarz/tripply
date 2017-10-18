@@ -27,8 +27,8 @@ And a button that displays a modal of the activity details on click -->
         <div class='col-2'>
             <h6><%= a.description %></h6>
         </div>
-        <div class='col-1 activity-button'>
-            <button >See Details</button>
+        <div class='col-1'>
+            <button id="<%= a._id %>" class="activity-button">See Details</button>
         </div>
     </div>
     <% }) %>
@@ -86,10 +86,10 @@ And a button that displays a modal of the activity details on click -->
                 </button>
             </div>
             <div class="modal-body">
-                <section>  </section>
-                <section>  </section>
-                <section>  </section>
-                <section>  </section>
+                <section id="activityPlace"> Place: </section>
+                <section id="activityDate"> Date: </section>
+                <section id="activityTime"> Time: </section>
+                <section id="activityDescription"> Description: </section>
             </div>
             <div class="modal-footer">
                 <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
@@ -105,17 +105,23 @@ And a button that displays a modal of the activity details on click -->
 // activity show stuff
     // activity detail click function
     $activityButton.on('click', function() {
+        var activityId = $(this).attr('id')
+        console.log($(this).attr('id'))
         // show modal on click
         $('#activityModal').modal()
         // use ajax to populate the modal with data from the route specified
-        $.ajax({
-           
+        $.ajax({ 
+            url: '/trips/<%= trip._id %>/activities/' + activityId,
+            method: 'get'
         })
-        .done((data) => { 
-            console.log(data)
+        .done((res) => { 
+            $('#activityPlace').text('Place: ' + res.place)
+            $('#activityDate').text('Date: ' + res.date)
+            $('#activityTime').text('Time: ' + res.time)
+            $('#activityDescription').text('Description: ' + res.description)
         })
     })
-// new activity stuff
+// NEW ACTIVITY STUFF
     $newActivityBtn.on('click', function() {
         $('#newActivityModal').modal()
     })
