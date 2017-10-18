@@ -121,10 +121,10 @@ And a button that displays a modal of the activity details on click -->
                         </select>
                     </div> -->
 
-                    <div class="form-group">
+                    <!-- <div class="form-group">
                         <label for="local">Price</label>
                         <input type="text" class="form-control" name="price">
-                    </div>
+                    </div> -->
 
                     <button id="search" type="submit" class="btn btn-primary">Search</button>
                     </form>
@@ -164,14 +164,14 @@ And a button that displays a modal of the activity details on click -->
         
 <script>
 // Datepicker
-$('.datepicker').datepicker()
-$('.datepicker').datepicker({
-  format: 'mm/dd/yyyy',
-  startDate: '-3d'
-})
-$('.datepicker').datepicker({
-  startDate: '-3d'
-})
+    $('.datepicker').datepicker()
+    $('.datepicker').datepicker({
+    format: 'mm/dd/yyyy',
+    startDate: '-3d'
+    })
+    $('.datepicker').datepicker({
+    startDate: '-3d'
+    })
 
 //ACTIVITY VIEW
     // variable set
@@ -245,16 +245,16 @@ $('.datepicker').datepicker({
         var formData = {
             "term": $('input[name=term]').val(),
             "location": $('input[name=location]').val(),
-            "price": $('input[name=price]').val(),
-            "sort_by": $('select[name=sort_by]').val(),
+            //"price": $('input[name=price]').val(),
+            //"sort_by": $('select[name=sort_by]').val(),
         }
         console.log(formData)
         var term = formData.term
         var location = formData.location
-        var sort = formData.sort_by
-        var price = formData.price
+        //var sort = formData.sort_by
+        //var price = formData.price
         $.ajax({
-            url: `/search?term=${term}&location=${location}&price=${price}`,
+            url: `/search?term=${term}&location=${location}&limit=5`,
             method: 'GET',
             data: JSON.stringify(formData),
             contentType: 'application/json'
@@ -268,22 +268,36 @@ $('.datepicker').datepicker({
     })
 
     function populate(items) {
-        console.log(items)
+        //console.log(items)
         $searchRes.html('')
         var hiRatedItems
-        items.slice(0, 20).forEach((item, i) => {
-            
+        items.slice(0, 5).forEach((item, i) => {
             var theLi = $('<li>').text(item.name)
             var innerUl = $('<ul>')
-            var innerLiRating = $('<li>').text(item.rating)
-            var innerLiDistance = $('<li>').text(item.distance)    
-            var innerLiAddress = $('<li>').text(item.location.address1 + ", " + item.location.city + " " + item.location.zip_code)
-            var innerLiPrice = $('<li>').text(item.price)    
+            var innerLiRating = $('<li>').text("Rating: " + item.rating)
+            var innerLiDistance = $('<li>').text("Distance: " + item.distance)    
+            var innerLiAddress = $('<li>').text("Address: " + item.location.address1 + ", " + item.location.city + " " + item.location.zip_code)
+            var innerLiPrice = $('<li>').text("Price: " + item.price)   
+            var selectButton = $('<button>').addClass('select-button').text('Select') 
             innerUl.append(innerLiRating, innerLiAddress, innerLiDistance, innerLiPrice)
-            theLi.append(innerUl)
+            theLi.append(selectButton, innerUl)
             $searchRes.append(theLi)
+            //console.log(selectButton.parent())
         })
     }
+    
+    var selectedPlace
+    var selectedAddress
+
+    $('body').on('click', '.select-button', function() {
+        var item = $(this).parent()
+        var placeName = item.text()
+        console.log(placeName)
+        $('#yelpActivityModal').modal('hide')   
+        $('#newActivityModal').modal()
+
+    })
+
 
 
 
