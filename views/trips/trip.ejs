@@ -1,18 +1,18 @@
 <div class='container trip-page'>
     <div class='row'>
-        <div class='col-8'>
+        <div class='col-6'>
             <h1><%= trip.name %></h1>
         </div>
-        <div class='col-8'>
-        <a class='btn btn-info' href='/trips/<%= trip._id %>/edit'>Edit Trip</a>
+        <div class='col-2'>
+            <a class='btn btn-info' href='/trips/<%= trip._id %>/edit'>Edit Trip</a>
         </div>
-    <div class='col-4'>
-        <button class='new-activity-button'>
-            <h3>Add Activity</h3>                
-        </button>
+        <div class='col-2'>
+            <button class='btn btn-primary new-activity-button'>Add Activity-M</button>
+        </div>
+        <div class='col-2'>
+            <button id="new-activity-yelp" class='btn btn-primary'>Add Activity-Y</button>
+        </div>
     </div>
-    
-</div>
 <!-- need to change the below section to be a div for each DAY
 In that day we want to see the name of each activity with the time (as list items)
 And a button that displays a modal of the activity details on click -->
@@ -39,95 +39,134 @@ And a button that displays a modal of the activity details on click -->
     <% }) %>
 </div>
 
-<form action="/users/profile/edit">
+<!-- <form action="/users/profile/edit">
 <button type="submit" id="update">Edit Profile</button>
 </form>	
-</div>
+</div> -->
 
-<div class="modal fade" id="newActivityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Add Activity</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+<!-- MANUALLY ADD ACTIVITY MODAL --> 
+    <div class="modal fade" id="newActivityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Add Activity</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="new-activity-form">
+                        <div class="form-group">
+                            <label for="name">Place</label>
+                            <input type="text" class="form-control" name="place">
+                        </div>
+                        <div class="form-group">
+                            <label for="length">Date</label>
+                            <input type="number" class="form-control" name="date">
+                        </div>
+                        <div class="form-group">
+                            <label for="local">Time</label>
+                            <input type="text" class="form-control" name="time">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input type="textarea" class="form-control" name="description">
+                        </div>
+                        <button id="add-activity" type="submit" class="btn btn-primary">Add Activity</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+<!-- YELP ADD ACTIVITY MODAL -->
+    <div class="modal fade" id="yelpActivityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
-                </button>
-            </div>
-            <div class="modal-body">
-                <form id="new-activity-form">
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="yelp-activity-form">
                     <div class="form-group">
-                        <label for="name">Place</label>
-                        <input type="text" class="form-control" name="place">
+                        <label for="name">Search Term</label>
+                        <input type="text" class="form-control" name="term">
                     </div>
+    
                     <div class="form-group">
-                        <label for="length">Date</label>
-                        <input type="number" class="form-control" name="date">
+                        <label for="local">Location</label>
+                        <input type="text" class="form-control" name="location">
                     </div>
-                    <div class="form-group">
-                        <label for="local">Time</label>
-                        <input type="text" class="form-control" name="time">
-                    </div>
-                    <div class="form-group">
-                        <label for="description">Description</label>
-                        <input type="textarea" class="form-control" name="description">
-                    </div>
-                    <button id="add-activity" type="submit" class="btn btn-primary">Add Activity</button>
-                </form>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-            </div>
-        </div>
-    </div>
-</div>
 
-<div class="modal fade" id="activityModal" tabindex="-1" role="dialog" aria-labelledby="activityModalLabel" aria-hidden="true">
-    <div class="modal-dialog" role="document">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="activityModalLabel">Activity Details</h5>
-                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
-                </button>
+                    <button id="search" type="submit" class="btn btn-primary">Search</button>
+                    </form>
+                </div>
+                <div class="results">
+                    <ul id="search-res"></ul>   
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+                </div>
             </div>
-            <div class="modal-body">
-                <section id="activityPlace"> Place: </section>
-                <section id="activityDate"> Date: </section>
-                <section id="activityTime"> Time: </section>
-                <section id="activityDescription"> Description: </section>
-            </div>
-            <div class="modal-footer">
-                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+        </div>
+
+<!-- ACTIVITY VIEW MODAL -->
+    <div class="modal fade" id="activityModal" tabindex="-1" role="dialog" aria-labelledby="activityModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="activityModalLabel">Activity Details</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <section id="activityPlace"> Place: </section>
+                    <section id="activityDate"> Date: </section>
+                    <section id="activityTime"> Time: </section>
+                    <section id="activityDescription"> Description: </section>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
             </div>
         </div>
     </div>
-</div>
         
 <script>
-// variable set
-    var $activityButton = $('.activity-button')
-    var $newActivityBtn = $('.new-activity-button')
-// activity show stuff
-    // activity detail click function
-    $activityButton.on('click', function() {
-        var activityId = $(this).attr('id')
-        console.log($(this).attr('id'))
-        // show modal on click
-        $('#activityModal').modal()
-        // use ajax to populate the modal with data from the route specified
-        $.ajax({
-            // create url by concatenating activityId 
-            url: '/trips/<%= trip._id %>/activities/' + activityId,
-            method: 'get'
+//ACTIVITY VIEW
+    // variable set
+        var $activityButton = $('.activity-button')
+        var $newActivityBtn = $('.new-activity-button')
+    // activity show stuff
+        // activity detail click function
+        $activityButton.on('click', function() {
+            var activityId = $(this).attr('id')
+            console.log($(this).attr('id'))
+            // show modal on click
+            $('#activityModal').modal()
+            // use ajax to populate the modal with data from the route specified
+            $.ajax({
+                // create url by concatenating activityId 
+                url: '/trips/<%= trip._id %>/activities/' + activityId,
+                method: 'get'
+            })
+            .done((res) => { 
+                $('#activityPlace').text('Place: ' + res.place)
+                $('#activityDate').text('Date: ' + res.date)
+                $('#activityTime').text('Time: ' + res.time)
+                $('#activityDescription').text('Description: ' + res.description)
+            })
         })
-        .done((res) => { 
-            $('#activityPlace').text('Place: ' + res.place)
-            $('#activityDate').text('Date: ' + res.date)
-            $('#activityTime').text('Time: ' + res.time)
-            $('#activityDescription').text('Description: ' + res.description)
-        })
-    })
-// NEW ACTIVITY STUFF
+        
+// MANUAL ADD ACTIVITY
     $newActivityBtn.on('click', function() {
         $('#newActivityModal').modal()
     })
@@ -135,10 +174,10 @@ And a button that displays a modal of the activity details on click -->
     $newActivityForm.on('submit', (evt) => {
         evt.preventDefault()
     var formData = {
-        "place": $('input[name=place').val(),
-        "date": $('input[name=date').val(),
-        "time": $('input[name=time').val(),
-        "description": $('input[name=description').val()
+        "place": $('input[name=place]').val(),
+        "date": $('input[name=date]').val(),
+        "time": $('input[name=time]').val(),
+        "description": $('input[name=description]').val()
     }
     $.ajax({
         url: '/trips/<%= trip._id %>/activity',
@@ -151,5 +190,41 @@ And a button that displays a modal of the activity details on click -->
         $('#newActivityModal').modal('hide')
     })
 })
+
+// YELP ADD ACTIVITY
+ // ajax get request for search should be a concatenated string:
+ // "/search?term=" + term + "&location=" + location
+    
+    //var activitiesList
+    
+    var $yelpActivityBtn = $('#new-activity-yelp')
+    var $yelpActivityForm = $('#yelp-activity-form')
+
+    $yelpActivityBtn.on('click', function() {
+        //window.location = '/trips'
+        $('#yelpActivityModal').modal()
+    })
+
+    $yelpActivityForm.on('submit', (evt) => {
+        console.log('clicked submit')
+        evt.preventDefault()
+        var formData = {
+            "place": $('input[name=place2]').val(),
+            "date": $('input[name=date2]').val(),
+            "time": $('input[name=time2]').val(),
+            "description": $('input[name=description2]').val()
+        }
+        console.log(formData)
+        $.ajax({
+            url: '/trips/<%= trip._id %>/activity',
+            method: 'POST',
+            data: JSON.stringify(formData),
+            contentType: 'application/json'
+        })
+        .done((data) => {
+            //console.log(data)
+            $('#yelpActivityModal').modal('hide')
+        })
+    })
 </script>
 
