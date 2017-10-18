@@ -3,11 +3,15 @@
         <div class='col-8'>
             <h1><%= trip.name %></h1>
         </div>
+        <div class='col-8'>
+        <a class='btn btn-info' href='/trips/<%= trip._id %>/edit'>Edit Trip</a>
+        </div>
     <div class='col-4'>
         <button class='new-activity-button'>
             <h3>Add Activity</h3>                
         </button>
     </div>
+    
 </div>
 <!-- need to change the below section to be a div for each DAY
 In that day we want to see the name of each activity with the time (as list items)
