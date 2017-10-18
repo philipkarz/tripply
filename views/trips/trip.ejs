@@ -87,7 +87,7 @@ And a button that displays a modal of the activity details on click -->
             <div class="modal-dialog" role="document">
                 <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                    <h5 class="modal-title" id="exampleModalLabel">Search for an activity on Yelp</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                     </button>
@@ -102,6 +102,28 @@ And a button that displays a modal of the activity details on click -->
                     <div class="form-group">
                         <label for="local">Location</label>
                         <input type="text" class="form-control" name="location">
+                    </div>
+                    <!-- <div class="form-group">
+                        <label for="local">Sort By</label>
+                        <select name="sort_by">
+                            <option value="best_match">Best Match</option>
+                            <option value="rating">Rating</option>
+                            <option value="distance">Distance</option>
+                        </select>
+                    </div> -->
+                    <!-- <div class="form-group">
+                        <label for="local">Price</label>
+                        <select name="price">
+                            <option value="1">Best Match</option>
+                            <option value="2">Rating</option>
+                            <option value="3">Distance</option>
+                            <option value="4">Distance</option>
+                        </select>
+                    </div> -->
+
+                    <div class="form-group">
+                        <label for="local">Price</label>
+                        <input type="text" class="form-control" name="price">
                     </div>
 
                     <button id="search" type="submit" class="btn btn-primary">Search</button>
@@ -208,16 +230,21 @@ And a button that displays a modal of the activity details on click -->
 
     $yelpActivityForm.on('submit', (evt) => {
         console.log('clicked submit')
+        console.log($('select[name=sort_by]'))
         evt.preventDefault()
         var formData = {
             "term": $('input[name=term]').val(),
             "location": $('input[name=location]').val(),
+            "price": $('input[name=price]').val(),
+            "sort_by": $('select[name=sort_by]').val(),
         }
         console.log(formData)
         var term = formData.term
         var location = formData.location
+        var sort = formData.sort_by
+        var price = formData.price
         $.ajax({
-            url: `/search?term=${term}&location=${location}`,
+            url: `/search?term=${term}&location=${location}&price=${price}`,
             method: 'GET',
             data: JSON.stringify(formData),
             contentType: 'application/json'
@@ -232,12 +259,17 @@ And a button that displays a modal of the activity details on click -->
 
     function populate(items) {
         console.log(items)
-        items.forEach((item, i) => {
+        $searchRes.html('')
+        var hiRatedItems
+        items.slice(0, 20).forEach((item, i) => {
+            
             var theLi = $('<li>').text(item.name)
             var innerUl = $('<ul>')
-            var innerLiPrice = $('<li>').text(item.price)
+            var innerLiRating = $('<li>').text(item.rating)
+            var innerLiDistance = $('<li>').text(item.distance)    
             var innerLiAddress = $('<li>').text(item.location.address1 + ", " + item.location.city + " " + item.location.zip_code)
-            innerUl.append(innerLiPrice, innerLiAddress)
+            var innerLiPrice = $('<li>').text(item.price)    
+            innerUl.append(innerLiRating, innerLiAddress, innerLiDistance, innerLiPrice)
             theLi.append(innerUl)
             $searchRes.append(theLi)
         })
