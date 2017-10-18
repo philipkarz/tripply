@@ -60,9 +60,9 @@ And a button that displays a modal of the activity details on click -->
                             <label for="name">Place</label>
                             <input type="text" class="form-control" name="place">
                         </div>
-                        <div class="form-group">
-                            <label for="length">Date</label>
-                            <input type="number" class="form-control" name="date">
+                        <div class="form-group" data-provide="datepicker">
+                                <label for="date">Date</label>
+                                <input type="text" class="form-control" name="date">
                         </div>
                         <div class="form-group">
                             <label for="local">Time</label>
@@ -163,6 +163,16 @@ And a button that displays a modal of the activity details on click -->
     </div>
         
 <script>
+// Datepicker
+$('.datepicker').datepicker()
+$('.datepicker').datepicker({
+  format: 'mm/dd/yyyy',
+  startDate: '-3d'
+})
+$('.datepicker').datepicker({
+  startDate: '-3d'
+})
+
 //ACTIVITY VIEW
     // variable set
         var $activityButton = $('.activity-button')
