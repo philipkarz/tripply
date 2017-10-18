@@ -199,6 +199,7 @@ And a button that displays a modal of the activity details on click -->
     
     var $yelpActivityBtn = $('#new-activity-yelp')
     var $yelpActivityForm = $('#yelp-activity-form')
+    var $searchRes = $('#search-res')
 
     $yelpActivityBtn.on('click', function() {
         //window.location = '/trips'
@@ -209,22 +210,36 @@ And a button that displays a modal of the activity details on click -->
         console.log('clicked submit')
         evt.preventDefault()
         var formData = {
-            "place": $('input[name=place2]').val(),
-            "date": $('input[name=date2]').val(),
-            "time": $('input[name=time2]').val(),
-            "description": $('input[name=description2]').val()
+            "term": $('input[name=term]').val(),
+            "location": $('input[name=location]').val(),
         }
         console.log(formData)
+        var term = formData.term
+        var location = formData.location
         $.ajax({
-            url: '/trips/<%= trip._id %>/activity',
-            method: 'POST',
+            url: `/search?term=${term}&location=${location}`,
+            method: 'GET',
             data: JSON.stringify(formData),
             contentType: 'application/json'
         })
-        .done((data) => {
+        .done((res) => {
+            populate(res)
             //console.log(data)
-            $('#yelpActivityModal').modal('hide')
+            //$('#yelpActivityModal').modal('hide')
+
         })
     })
-</script>
+
+    function populate(items) {
+        console.log(items)
+        items.forEach((item, i) => {
+            var theLi = $('<li>').text(item.name)
+            var innerUl = $('<ul>')
+            var innerLiPrice = $('<li>').text(item.price)
+            var innerLiAddress = $('<li>').text(item.location.address + item.location.city + item.location.zip_code)
+            innerUl.append(innerLiPrice, innerLiAddress)
+            theLi.append(innerUl)
+            $searchRes.append(theLi)
+        })
+    }</script>
 
