@@ -28,6 +28,7 @@ And a button that displays a modal of the activity details on click -->
             <h6><%= a.description %></h6>
         </div>
         <div class='col-1'>
+            <!-- assign id to button based on objects db id to use in ajax request -->
             <button id="<%= a._id %>" class="activity-button">See Details</button>
         </div>
     </div>
@@ -43,7 +44,7 @@ And a button that displays a modal of the activity details on click -->
     <div class="modal-dialog" role="document">
         <div class="modal-content">
             <div class="modal-header">
-                <h5 class="modal-title" id="exampleModalLabel">Modal title</h5>
+                <h5 class="modal-title" id="exampleModalLabel">Add Activity</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
                     <span aria-hidden="true">&times;</span>
                 </button>
@@ -110,7 +111,8 @@ And a button that displays a modal of the activity details on click -->
         // show modal on click
         $('#activityModal').modal()
         // use ajax to populate the modal with data from the route specified
-        $.ajax({ 
+        $.ajax({
+            // create url by concatenating activityId 
             url: '/trips/<%= trip._id %>/activities/' + activityId,
             method: 'get'
         })
@@ -135,7 +137,7 @@ And a button that displays a modal of the activity details on click -->
         "description": $('input[name=description').val()
     }
     $.ajax({
-        url: 'trips/<%= trip._id %>/activity',
+        url: '/trips/<%= trip._id %>/activity',
         method: 'POST',
         data: JSON.stringify(formData),
         contentType: 'application/json'
