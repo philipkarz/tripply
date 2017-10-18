@@ -22,7 +22,7 @@ const
 
 const
     PORT = process.env.PORT || 3000,
-    mongoConnectionString = process.env.MONGODB_URI || 'mongodb://localhost/passport-authentication'
+    mongoConnectionString = process.env.MONGODB_URI || 'mongodb://localhost/tripply'
 
 mongoose.connect(mongoConnectionString, (err) => {
     console.log(err || 'Connected to MongoDB')
