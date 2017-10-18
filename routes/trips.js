@@ -35,7 +35,7 @@ tripsRouter.route('/:id')
         })
     })
 
-    tripsRouter.route('/:id/activity')
+tripsRouter.route('/:id/activity')
     .get((req, res) => {
         Trip.findById(req.params.id, (err, trip) => {
             //res.json(trip)
@@ -62,5 +62,12 @@ tripsRouter.route('/:id')
             res.json({success: true, message: `${deletedTrip.name} has been deleted.`})
         })
     })
+
+    tripsRouter.route('/:tripId/activities/:activityId') 
+        .get((req, res) => {
+            Activity.find({trip: req.params.tripId}, (err, activity) => {
+                console.log(activity)
+            })
+        })
 
 module.exports = tripsRouter
