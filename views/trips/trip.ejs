@@ -196,9 +196,9 @@ And a button that displays a modal of the activity details on click -->
                 </div>
                 <div class="modal-footer">
                     <!-- NEED TO FIND A WAY TO GET THE EXACT ACTIVITY ID AND PUT IT IN THE ROUTE HERE -->
-                    <!-- <form method="post" action="/trips/<%= trip._id %>?_method=DELETE"></form>
-                        <button type="button" class="btn btn-secondary delete-activity-button" data-dismiss="modal">Delete Activity</button>
-                    </form> -->
+                    <!-- <form method="post" action="/trips/<%= trip._id %>/activities/<%# activity._id %>?_method=DELETE"></form> -->
+                        <button id='delete-activity' type="button" class="btn btn-secondary delete-activity-button" data-dismiss="modal">Delete Activity</button>
+                    <!-- </form> -->
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
@@ -274,6 +274,26 @@ And a button that displays a modal of the activity details on click -->
         $('#editActivityDescription').val(res.description)
     })
 })
+
+// Delete Activity
+    // variable set
+    var $activityButton = $('.activity-button')
+    var activityId = $(this).attr('id')
+    console.log(activityId)
+    var $deleteActivityBtn = $('.delete-activity-button')
+// activity show stuff
+    // activity detail click function
+    $deleteActivityBtn.on('click', function() {
+        // use ajax to populate the modal with data from the route specified
+        $.ajax({
+            // create url by concatenating activityId 
+            url: '/trips/<%= trip._id %>/activities/' + activityId,
+            method: 'delete'
+        })
+        .done((res) => { 
+            console.log(res)
+        })
+    })
         
 // MANUAL ADD ACTIVITY
     $newActivityBtn.on('click', function() {

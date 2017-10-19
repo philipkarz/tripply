@@ -82,7 +82,7 @@ tripsRouter.route('/:tripId/activities/:activityId')
         })
     })
     .delete((req, res) => {
-        Activity.findByIdAndRemove(req.params.id, (err, deletedActivity) => {
+        Activity.findByIdAndRemove(req.params.activityId, (err, deletedActivity) => {
             res.json({success: true, message: `${deletedActivity.place} has been deleted.`})
         })
     })
