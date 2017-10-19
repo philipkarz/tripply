@@ -36,7 +36,10 @@ var userId
 usersRouter.route('/profile') 
     .get(isLoggedIn, (req, res) => {
         Trip.find({user: req.user._id}, (err, trips) => {
-            res.render('profile', {user: req.user, trips:trips})
+            var sortedTrips = trips.sort(function(a, b) {
+                return new Date(a.startDate).getTime() - new Date(b.startDate).getTime() 
+            })
+            res.render('profile', {user: req.user, trips:sortedTrips})
             userId = req.user._id
         })
         userId = req.user._id

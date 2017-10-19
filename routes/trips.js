@@ -8,6 +8,7 @@ const
 tripsRouter.route('/')
     .get((req, res) => {
         Trip.find({}, (err, trips) => {
+            
             res.json(trips)
             // res.render('../views/trips/all-trips', {trips:trips })
         })
@@ -83,3 +84,4 @@ tripsRouter.route('/:id/edit')
 })
     
 module.exports = tripsRouter
+

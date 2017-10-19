@@ -12,6 +12,8 @@
   </div>
   <div class='row trip'>
       <% trips.forEach(function(t) { %>
+        
+      
               <div class='col-4 trip-name'>
                   <h6> Trip Name: <%= t.name %></a> </h6>
               </div>
@@ -25,11 +27,15 @@
                 <a href="/trips/<%= t._id %>"><button>
                       <p>...</p>
                   </button></a>
+                    
               </div>
               <!-- <form action="`/trips/{trip:id}/edit`">
                 <button type="submit" id="update">Edit Trip</button>
             </form>	 -->
+         
       <% }) %> 
+
+      
   </div>
   <form action="/users/profile/edit">
       <button type="submit" id="update">Edit Profile</button>
