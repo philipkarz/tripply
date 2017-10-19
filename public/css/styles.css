@@ -100,12 +100,13 @@
     }
 }
 
-
-
-
 .card {
     display: inline-block;
     margin: 15px;
+    
+}
+
+.card-height {
     height: 375px;
 }
 
@@ -119,4 +120,15 @@
 
 .the-name {
     display: inline;
+}
+
+.card-width {
+    width: 100%;
+    margin: 10px auto;
+}
+
+#search-res {
+    margin: 0 auto;
+    padding: 50px;
+}
 }

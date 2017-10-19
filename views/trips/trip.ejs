@@ -3,26 +3,26 @@
         <div class='col-6'>
             <h1><%= trip.name %></h1>
         </div>
-       
+
+       <!-- Determines whether to show Edit/Add buttons (no unless the trip belongs to the current user) -->
         <% if(currentUser) { %>
             <% var currentUserId = currentUser._id.toString() %>
         <% } %>
         <% var tripUserId = trip.user %>
         <% if(loggedIn && currentUserId == tripUserId) { %>
             <% console.log(currentUserId == tripUserId) %>
-            <!-- <% console.log(currentUser._id) %>
-            <% console.log(trip.user) %> -->
         <div class='col-2'>
             <a class='btn btn-info' href='/trips/<%= trip._id %>/edit'>Edit Trip</a>
         </div>
         <div class='col-2'>
-            <button class='btn btn-primary new-activity-button'>Add Activity-M</button>
+            <button class='btn btn-primary new-activity-button'>Add Activity</button>
         </div>
         <div class='col-2'>
-            <button id="new-activity-yelp" class='btn btn-primary'>Add Activity-Y</button>
+            <button id="new-activity-yelp" class='btn btn-primary'>Search Yelp</button>
         </div>
         <% } %>
     </div>
+
 <!-- need to change the below section to be a div for each DAY
 In that day we want to see the name of each activity with the time (as list items)
 And a button that displays a modal of the activity details on click -->
@@ -51,12 +51,8 @@ And a button that displays a modal of the activity details on click -->
     <% }) %>
 </div>
 
-<!-- <form action="/users/profile/edit">
-<button type="submit" id="update">Edit Profile</button>
-</form>	
-</div> -->
 
-<!-- MANUALLY ADD ACTIVITY MODAL --> 
+<!-- MODAL - ADD ACTIVITY --> 
     <div class="modal fade" id="newActivityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -94,42 +90,43 @@ And a button that displays a modal of the activity details on click -->
         </div>
     </div>
 
-<!-- YELP ADD ACTIVITY MODAL -->
-    <div class="modal fade" id="yelpActivityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
-            <div class="modal-dialog" role="document">
-                <div class="modal-content">
-                <div class="modal-header">
-                    <h5 class="modal-title" id="exampleModalLabel">Search for an activity on Yelp</h5>
-                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
-                    </button>
-                </div>
-                <div class="modal-body">
-                    <form id="yelp-activity-form">
-                    <div class="form-group">
-                        <label for="name">Search Term</label>
-                        <input type="text" class="form-control term" name="term">
-                    </div>
-    
-                    <div class="form-group">
-                        <label for="local">Location</label>
-                        <input type="text" class="form-control loc" name="location">
-                    </div>
 
-                    <button id="search" type="submit" class="btn btn-primary">Search</button>
-                    </form>
+<!-- MODAL - SEARCH YELP -->
+    <div class="modal fade" id="yelpActivityModal" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLabel">Search for an activity on Yelp</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <form id="yelp-activity-form">
+                <div class="form-group">
+                    <label for="name">Search Term</label>
+                    <input type="text" class="form-control term" name="term">
                 </div>
-                <div class="results">
-                    <ul id="search-res"></ul>   
+
+                <div class="form-group">
+                    <label for="local">Location</label>
+                    <input type="text" class="form-control loc" name="location">
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
-                </div>
-                </div>
+
+                <button id="search" type="submit" class="btn btn-primary">Search</button>
+                </form>
+            </div>
+            <div class="results">
+                <ul id="search-res"></ul>   
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+            </div>
             </div>
         </div>
+    </div>
 
-<!-- ACTIVITY VIEW MODAL -->
+<!-- MODAL - ACTIVITY VIEW -->
     <div class="modal fade" id="activityModal" tabindex="-1" role="dialog" aria-labelledby="activityModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -151,19 +148,20 @@ And a button that displays a modal of the activity details on click -->
             </div>
         </div>
     </div>
-        
+
+
+
 <script>
-// Datepicker
-    $('.datepicker').datepicker()
+    
+
+// DATEPICKER
     $('.datepicker').datepicker({
-    format: 'mm/dd/yyyy',
-    startDate: '-3d'
-    })
-    $('.datepicker').datepicker({
-    startDate: '-3d'
+        format: 'mm/dd/yyyy',
+        startDate: '-3d'
     })
 
-//ACTIVITY VIEW
+
+// ACTIVITY VIEW
     // variable set
         var $activityButton = $('.activity-button')
         var $newActivityBtn = $('.new-activity-button')
@@ -188,14 +186,12 @@ And a button that displays a modal of the activity details on click -->
             })
         })
         
-// MANUAL ADD ACTIVITY
+// ADD ACTIVITY
+    var $newActivityForm = $('#new-activity-form')
 
     $newActivityBtn.on('click', function() {
         $('#newActivityModal').modal()
     })
-
-
-    var $newActivityForm = $('#new-activity-form')
 
     $('#add').on('submit', (evt) => {
         console.log('you clicked')
@@ -218,12 +214,7 @@ And a button that displays a modal of the activity details on click -->
         evt.preventDefault()
     })
 
-// YELP ADD ACTIVITY
- // ajax get request for search should be a concatenated string:
- // "/search?term=" + term + "&location=" + location
-    
-    //var activitiesList
-    
+// SEARCH YELP
     var $yelpActivityBtn = $('#new-activity-yelp')
     var $yelpActivityForm = $('#yelp-activity-form')
     var $searchRes = $('#search-res')
@@ -231,7 +222,6 @@ And a button that displays a modal of the activity details on click -->
     var $term = $('.term')
 
     $yelpActivityBtn.on('click', function() {
-        //window.location = '/trips'
         $('#yelpActivityModal').modal()
         $searchRes.html('')
         $loc.val('')
@@ -245,70 +235,54 @@ And a button that displays a modal of the activity details on click -->
         var formData = {
             "term": $('input[name=term]').val(),
             "location": $('input[name=location]').val(),
-            //"price": $('input[name=price]').val(),
-            //"sort_by": $('select[name=sort_by]').val(),
+            "limit": 5,
         }
         console.log(formData)
         var term = formData.term
         var location = formData.location
-        //var sort = formData.sort_by
-        //var price = formData.price
+        var limit = formData.limit
         $.ajax({
-            url: `/search?term=${term}&location=${location}&limit=5`,
+            url: `/search?term=${term}&location=${location}&limit=${limit}`,
             method: 'GET',
             data: JSON.stringify(formData),
             contentType: 'application/json'
         })
         .done((res) => {
             populate(res)
-            //console.log(data)
-            //$('#yelpActivityModal').modal('hide')
-
+            console.log(res)
         })
     })
 
     function populate(items) {
         //console.log(items)
         $searchRes.text('')
-        var hiRatedItems
-        /*
         items.slice(0, 5).forEach((item, i) => {
-            var theLi = $('<li>').text(item.name)
-            var innerUl = $('<ul>')
-            var innerLiRating = $('<li>').text("Rating: " + item.rating)
-            var innerLiDistance = $('<li>').text("Distance: " + item.distance)    
-            var innerLiAddress = $('<li>').text("Address: " + item.location.address1 + ", " + item.location.city + " " + item.location.zip_code)
-            var innerLiPrice = $('<li>').text("Price: " + item.price)   
-            var selectButton = $('<button>').addClass('select-button').text('Select') 
-            innerUl.append(innerLiRating, innerLiAddress, innerLiDistance, innerLiPrice)
-            theLi.append(selectButton, innerUl)
-            $searchRes.append(theLi)
-            //console.log(selectButton.parent())
-        })
-        */
-        items.slice(0, 5).forEach((item, i) => {
-            
-            var theName = $('<div>').addClass('the-name').text(item.name)
-            var theInfo = $('<div>')
-            var innerLiRating = $('<li>').text("Rating: " + item.rating)
-            var innerLiDistance = $('<li>').text("Distance away: " + (item.distance * 0.000621371192).toFixed(2) + " mi")
-            var innerLiAddress = $('<li>').text("Address: " + item.location.address1 + ", " + item.location.city + " " + item.location.zip_code)
+            var card = $('<div>').addClass('card card-width').css("style", "width: 20rem;")
+            var img = $('<img>').addClass('card-img-top').attr("src", item.image_url)
+            var cardBody = $('<div>').addClass('card-body')
+            var h4 = $('<h4>').addClass('card-title').text(item.name)
+            var ul = $('<ul>')
+            var liRating = $('<li>').text("Rating: " + item.rating)
+            var liDistance = $('<li>').text("Distance away: " + (item.distance * 0.000621371192).toFixed(2) + " mi")
+            var liAddress = $('<li>').text("Address: " + item.location.address1 + ", " + item.location.city + " " + item.location.zip_code)
+            var liSeeMore = $('<li>')
+            var yelpButton = $('<a>').attr("href", item.url).text('See More on Yelp')
+            var selectButton = $('<button>').addClass('select-button').text("Select")
             var itemPrice = item.price
-            var innerLiPrice = checkPrice(itemPrice)
+            var liPrice = checkPrice(itemPrice)
+            liSeeMore.append(yelpButton)                    
+            ul.append(liRating, liDistance, liAddress, liPrice, liSeeMore)
+            cardBody.append(h4, selectButton, ul)
+            card.append(img, cardBody)
+            $searchRes.append(card)
             function checkPrice(itemPrice) {
                 if(item.price) {
                     return $('<li>').text("Price: " + item.price)   
                 }
             }
-            var selectButton = $('<button>').addClass('select-button').text('Select') 
-            theInfo.append(innerLiRating, innerLiAddress, innerLiDistance, innerLiPrice)
-            $searchRes.append(theName, selectButton, theInfo)
         })
-
-
     }
     
-
     $('body').on('click', '.select-button', function() {
         var item = $(this).prev()
         selectedPlace = item.text()
