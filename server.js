@@ -79,7 +79,11 @@ app.get('/weather', function (req, res) {
   app.post('/weather', function (req, res) {
     let city = req.body.city
     let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
-  
+    
+    // $date = new DateTime('2016-02-14 12:24:48.32')
+    
+    // $newdate= $date.getTimestamp()
+
     request(url, function (err, response, body) {
       if(err){
         res.render('weather', {weather: null, error: 'Error, please try again'})

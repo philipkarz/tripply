@@ -20,8 +20,10 @@ tripsRouter.route('/')
             Activity.find({trip: req.params.id}, (err, activities) => {
                 var sortedActivities = activities.sort(function(a, b) {
                     return new Date(a.date).getTime() - new Date(b.date).getTime() 
-                })
-                res.render('../views/trips/trip', {trip:trip, activities: sortedActivities})
+                    // var sortedActTime = activitiesTime.sort(function(a, b) {
+                     // return new Date(a.time).getTime() - new Date(b.time).getTime() 
+                    })
+                res.render('../views/trips/trip', {trip:trip, activities: sortedActivities, })
             })
         })
     })

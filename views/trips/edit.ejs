@@ -11,8 +11,13 @@
                
               </div>
                 <div class="col">
-                  <label for="exampleFormControlInput1">Length</label>
-                  <input type="name" name="length" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<%= trip.length %>" placeholder="Enter Length">
+                  <label for="exampleFormControlInput1">Start Date</label>
+                  <input type="name" name="start-date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<%= trip.startDate %>" placeholder="Enter Start Darte">
+                 
+                </div>
+                <div class="col">
+                  <label for="exampleFormControlInput1">End Date</label>
+                  <input type="name" name="end-date" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<%= trip.endDate %>" placeholder="Enter End Date">
                  
                 </div>
                 <div class="col">
@@ -21,7 +26,7 @@
                 </div>
                 <div class="col">
                         <label for="exampleFormControlTextarea1">Description</label>
-                        <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" value="<%= trip.description %>" placeholder="Enter Description"></textarea>
+                        <textarea type="name" class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" value="<%= trip.description %>" placeholder="Enter Description"></textarea>
                       </div>
     </div> 
                 <button type="submit" class="btn btn-primary">Update</button>
