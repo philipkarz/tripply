@@ -34,14 +34,17 @@ usersRouter.route('/signup')
 
 var userId
 usersRouter.route('/profile') 
-    .get(isLoggedIn, (req, res) => {
-        Trip.find({user: req.user._id}, (err, trips) => {
-            res.render('profile', {user: req.user, trips:trips})
-            userId = req.user._id
+.get(isLoggedIn, (req, res) => {
+    Trip.find({user: req.user._id}, (err, trips) => {
+        var sortedTrips = trips.sort(function(a, b) {
+            return new Date(a.startDate).getTime() - new Date(b.startDate).getTime() 
         })
+        res.render('profile', {user: req.user, trips:sortedTrips})
         userId = req.user._id
-        console.log(userId)
     })
+    userId = req.user._id
+    console.log(userId)
+})
     
     .patch(isLoggedIn, (req, res) => {
         // console.log(req.body)

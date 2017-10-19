@@ -1,56 +1,142 @@
-<div class='container trip-page'>
-    <div class='row'>
-        <div class='col-6'>
-            <h1><%= trip.name %></h1>
+<!DOCTYPE html>
+<!-- saved from url=(0052)http://localhost:3000/trips/59e6390b05396553c2cdf357 -->
+<html lang="en"><head><meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+    
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta http-equiv="X-UA-Compatible" content="ie=edge">
+    <title>Tripply</title>
+    <link rel="stylesheet" href="./Tripply_files/bootstrap.min.css">
+    <link rel="stylesheet" href="./Tripply_files/styles.css">
+    <link rel="stylesheet" href="./Tripply_files/bootstrap-datepicker.min.css">
+    <script src="./Tripply_files/jquery-3.2.1.min.js"></script>
+    <script src="./Tripply_files/popper.min.js"></script>
+    <script src="./Tripply_files/bootstrap.min.js"></script>
+    <script src="./Tripply_files/bootstrap-datepicker.js"></script>
+</head>
+<body>
+    <nav class="navbar navbar-expand-lg navbar-light bg-light">
+    <a class="navbar-brand" href="http://localhost:3000/">Tripply</a>
+    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+    </button>
+  
+    
+    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+      <ul class="navbar-nav ml-auto">
+        <!-- <li class="nav-item active">
+          <a class="nav-link" href="/">Home</a>
+        </li> -->
+        
+            <li class="nav-item active">
+                <a class="nav-link" href="http://localhost:3000/users/profile">Profile</a>
+            </li>
+            <li class="nav-item active">
+                <a class="nav-link" href="http://localhost:3000/users/logout">Log Out</a>
+            </li> 
+        
+      </ul>
+    </div>
+   
+</nav> 
+    <div class="container trip-page">
+    <div class="row">
+        <div class="col-6">
+            <h1>Hello</h1>
         </div>
 
        <!-- Determines whether to show Edit/Add buttons (no unless the trip belongs to the current user) -->
-        <% if(currentUser) { %>
-            <% var currentUserId = currentUser._id.toString() %>
-        <% } %>
-        <% var tripUserId = trip.user %>
-        <% if(loggedIn && currentUserId == tripUserId) { %>
-            <% console.log(currentUserId == tripUserId) %>
-        <div class='col-2'>
-            <a class='btn btn-info' href='/trips/<%= trip._id %>/edit'>Edit Trip</a>
+        
+            
+        
+        
+        
+            
+        <div class="col-2">
+            <a class="btn btn-info" href="http://localhost:3000/trips/59e6390b05396553c2cdf357/edit">Edit Trip</a>
         </div>
-        <div class='col-2'>
-            <button class='btn btn-primary new-activity-button'>Add Activity</button>
+        <div class="col-2">
+            <button class="btn btn-primary new-activity-button">Add Activity</button>
         </div>
-        <div class='col-2'>
-            <button id="new-activity-yelp" class='btn btn-primary'>Search Yelp</button>
+        <div class="col-2">
+            <button id="new-activity-yelp" class="btn btn-primary">Search Yelp</button>
         </div>
-        <% } %>
+        
     </div>
 
 <!-- need to change the below section to be a div for each DAY
 In that day we want to see the name of each activity with the time (as list items)
 And a button that displays a modal of the activity details on click -->
 
-    <% activities.forEach(function(a) { %>
-        <div id='activity-container-<%= a._id %>' class='list-group row day'>
-            <div class='col-12' >
-                <h3 class='activity-date'><%= a.date %></h3>
+    
+        <div id="activity-container-59e8e647914231c8d441305c" class="list-group row day">
+            <div class="col-12">
+                <h3>10/21/2017</h3>
             </div>
             <div class="list-group-item">
-                <div class='row activities'>
-                    <div class='col-4 activity-name'>
-                        <h6 class='activity-place'><%= a.place %></h6>
+                <div class="row activities">
+                    <div class="col-4 activity-name">
+                        <h6 class="activity-place">hhh</h6>
                     </div>
-                    <div class='col-4 activity-time'>
-                        <h6 class='activity-time'><%= a.time %></h6>
+                    <div class="col-4 activity-time">
+                        <h6>erqfe</h6>
                     </div>
-                    <div class='col-2'>
-                        <h6 class='activity-description'><%= a.description %></h6>
+                    <div class="col-2">
+                        <h6>efeqrf</h6>
                     </div>
-                    <div class='col-1'>
+                    <div class="col-1">
                         <!-- assign id to button based on objects db id to use in ajax request -->
-                        <button id="<%= a._id %>" class="btn btn-primary activity-button">See Details</button>
+                        <button id="59e8e647914231c8d441305c" class="btn btn-primary activity-button">See Details</button>
                     </div>
                 </div>
             </div>
         </div>
-    <% }) %>
+    
+        <div id="activity-container-59e8f09c88051ecf655c56ca" class="list-group row day">
+            <div class="col-12">
+                <h3>10/23/2017</h3>
+            </div>
+            <div class="list-group-item">
+                <div class="row activities">
+                    <div class="col-4 activity-name">
+                        <h6 class="activity-place">hello</h6>
+                    </div>
+                    <div class="col-4 activity-time">
+                        <h6>10:00 P.M.</h6>
+                    </div>
+                    <div class="col-2">
+                        <h6>sfdgersdghtf</h6>
+                    </div>
+                    <div class="col-1">
+                        <!-- assign id to button based on objects db id to use in ajax request -->
+                        <button id="59e8f09c88051ecf655c56ca" class="btn btn-primary activity-button">See Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
+        <div id="activity-container-59e8f0bf88051ecf655c56cb" class="list-group row day">
+            <div class="col-12">
+                <h3>10/23/2017</h3>
+            </div>
+            <div class="list-group-item">
+                <div class="row activities">
+                    <div class="col-4 activity-name">
+                        <h6 class="activity-place">g</h6>
+                    </div>
+                    <div class="col-4 activity-time">
+                        <h6>10:00 P.M.</h6>
+                    </div>
+                    <div class="col-2">
+                        <h6>eqwaraw</h6>
+                    </div>
+                    <div class="col-1">
+                        <!-- assign id to button based on objects db id to use in ajax request -->
+                        <button id="59e8f0bf88051ecf655c56cb" class="btn btn-primary activity-button">See Details</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    
 
 
 
@@ -61,11 +147,11 @@ And a button that displays a modal of the activity details on click -->
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Add Activity</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="new-activity-form" action="/trips/<%= trip.id %>/activity" method="POST">
+                    <form id="new-activity-form" action="http://localhost:3000/trips/59e6390b05396553c2cdf357/activity" method="POST">
                         <div class="form-group">
                             <label for="name">Place</label>
                             <input type="text" class="form-control place-name" value="" name="place">
@@ -100,7 +186,7 @@ And a button that displays a modal of the activity details on click -->
             <div class="modal-header">
                 <h5 class="modal-title" id="exampleModalLabel">Search for an activity on Yelp</h5>
                 <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                <span aria-hidden="true">&times;</span>
+                <span aria-hidden="true">×</span>
                 </button>
             </div>
             <div class="modal-body">
@@ -135,7 +221,7 @@ And a button that displays a modal of the activity details on click -->
                 <div class="modal-header">
                     <h5 class="modal-title" id="activityModalLabel">Activity Details</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                    <span aria-hidden="true">&times;</span>
+                    <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -159,7 +245,7 @@ And a button that displays a modal of the activity details on click -->
                 <div class="modal-header">
                     <h5 class="modal-title" id="exampleModalLabel">Edit Activity</h5>
                     <button type="button" class="close" data-dismiss="modal" aria-label="Close">
-                        <span aria-hidden="true">&times;</span>
+                        <span aria-hidden="true">×</span>
                     </button>
                 </div>
                 <div class="modal-body">
@@ -185,8 +271,8 @@ And a button that displays a modal of the activity details on click -->
                 </div>
                 <div class="modal-footer">
                     <!-- NEED TO FIND A WAY TO GET THE EXACT ACTIVITY ID AND PUT IT IN THE ROUTE HERE -->
-                    <!-- <form method="post" action="/trips/<%= trip._id %>/activities/<%# activity._id %>?_method=DELETE"></form> -->
-                        <button id='delete-activity' type="button" class="btn btn-secondary delete-activity-button" data-dismiss="modal">Delete Activity</button>
+                    <!-- <form method="post" action="/trips/59e6390b05396553c2cdf357/activities/?_method=DELETE"></form> -->
+                        <button id="delete-activity" type="button" class="btn btn-secondary delete-activity-button" data-dismiss="modal">Delete Activity</button>
                     <!-- </form> -->
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
@@ -221,7 +307,7 @@ var globalActivityId
             // use ajax to populate the modal with data from the route specified
             $.ajax({
                 // create url by concatenating activityId 
-                url: '/trips/<%= trip._id %>/activities/' + activityId,
+                url: '/trips/59e6390b05396553c2cdf357/activities/' + activityId,
                 method: 'get'
             })
             .done((res) => { 
@@ -257,7 +343,7 @@ var globalActivityId
                 "time": $('#edit-activity-form input[name=time]').val(),
                 "description": $('#edit-activity-form input[name=description]').val()
         }
-        var reqUrl =  '/trips/<%= trip._id %>/activities/' + globalActivityId
+        var reqUrl =  '/trips/59e6390b05396553c2cdf357/activities/' + globalActivityId
         console.log(reqUrl)
         $.ajax({
             url: reqUrl,
@@ -268,12 +354,12 @@ var globalActivityId
         .done((res) => {
             console.log(res)
             $('#editActivityModal').modal('hide')
-            console.log($('#activity-container-' + res._id).find('.activity-place'))
-            console.log(res.place)
-            $('#activity-container-' + res._id).find('.activity-place').text(res.place)
-            $('#activity-container-' + res._id).find('.activity-date').text(res.date)
-            $('#activity-container-' + res._id).find('.activity-time').text(res.time)
-            $('#activity-container-' + res._id).find('.activity-description').text(res.description)
+            /* Need to figure out the lines below in order to have the edit modal populate
+            the form by default */
+            /*$('#edit-activity-place').val(res.place)
+            $('#editActivityDate').val(res.date)
+            $('#editActivityTime').val(res.time)
+            $('#editActivityDescription').val(res.description)*/
         })
 })
 
@@ -282,17 +368,17 @@ var globalActivityId
     var $activityButton = $('.activity-button')
     console.log(globalActivityId)
     var $deleteActivityBtn = $('.delete-activity-button')
+// activity show stuff
     // activity detail click function
     $deleteActivityBtn.on('click', function() {
         // use ajax to populate the modal with data from the route specified
         $.ajax({
             // create url by concatenating globalActivityId 
-            url: '/trips/<%= trip._id %>/activities/' + globalActivityId,
+            url: '/trips/59e6390b05396553c2cdf357/activities/' + globalActivityId,
             method: 'delete'
         })
         .done((res) => { 
-            //reload the page
-            location.reload();
+            console.log(res)
         })
     })
         
@@ -312,7 +398,7 @@ var globalActivityId
             "description": $('input[name=description]').val()
         }
         $.ajax({
-            url: '/trips/<%= trip._id %>/activity',
+            url: '/trips/59e6390b05396553c2cdf357/activity',
             method: 'POST',
             data: JSON.stringify(formData),
             contentType: 'application/json'
@@ -415,4 +501,6 @@ var globalActivityId
 
 
 
-</script>
+</script> 
+
+</div></body></html>
