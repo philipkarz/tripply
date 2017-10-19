@@ -72,6 +72,39 @@
     padding-bottom: 25rem!important; 
 }
 
+/* All Trips Page */
+
+@media only screen and (max-width:992px) {
+    .card-box {
+        width: 355px;
+        margin: 0 auto; 
+    }
+}
+
+@media only screen and (min-width:992px) {
+    .card-box {
+        width: 710px;
+        margin: 0 auto; 
+    }
+}
+
+
+@media only screen and (min-width:1200px) {
+    .card-box {
+        width: 1065px;
+        margin: 0 auto; 
+    }
+}
+
+
+
+
+.card {
+    display: inline-block;
+    margin: 15px;
+    height: 375px;
+}
+
 /* Yelp Search Results */
 
 .select-button {

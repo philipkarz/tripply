@@ -3,6 +3,15 @@
         <div class='col-6'>
             <h1><%= trip.name %></h1>
         </div>
+       
+        <% if(currentUser) { %>
+            <% var currentUserId = currentUser._id.toString() %>
+        <% } %>
+        <% var tripUserId = trip.user %>
+        <% if(loggedIn && currentUserId == tripUserId) { %>
+            <% console.log(currentUserId == tripUserId) %>
+            <!-- <% console.log(currentUser._id) %>
+            <% console.log(trip.user) %> -->
         <div class='col-2'>
             <a class='btn btn-info' href='/trips/<%= trip._id %>/edit'>Edit Trip</a>
         </div>
@@ -12,6 +21,7 @@
         <div class='col-2'>
             <button id="new-activity-yelp" class='btn btn-primary'>Add Activity-Y</button>
         </div>
+        <% } %>
     </div>
 <!-- need to change the below section to be a div for each DAY
 In that day we want to see the name of each activity with the time (as list items)
