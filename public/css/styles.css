@@ -1,6 +1,8 @@
 @import url('https://fonts.googleapis.com/css?family=Lobster+Two');
 
 .matchy-jumbo {
+    padding: 5%!important;
+    width: 80%!important; 
     background: rgb(109,179,242)!important; /* Old browsers */
     background: -moz-linear-gradient(top, rgba(109,179,242,1) 0%, rgba(84,163,238,1) 50%, rgba(54,144,240,1) 82%, rgba(54,144,240,1) 82%, rgba(30,105,222,1) 100%)!important; /* FF3.6-15 */
     background: -webkit-linear-gradient(top, rgba(109,179,242,1) 0%,rgba(84,163,238,1) 50%,rgba(54,144,240,1) 82%,rgba(54,144,240,1) 82%,rgba(30,105,222,1) 100%)!important; /* Chrome10-25,Safari5.1-6 */
@@ -160,6 +162,27 @@
     padding: 50px;
 }
 
+
+/* Login and signup form page styles */
 .login-home {
     text-align: center; 
+}
+
+.signup-signup {
+    margin: 0 auto; 
+    text-align: center; 
+}
+
+.signup-home {
+    margin: 0 auto; 
+    margin-top: 1rem; 
+    text-align: center; 
+}
+
+.signup-container {
+    margin-top: -2rem!important; 
+}
+
+.login-container {
+    margin-top: -2rem!important; 
 }
