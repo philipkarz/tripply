@@ -62,10 +62,15 @@
 }
 
 /* Home page  */
-.carousel-caption {
-    position: absolute; 
-    padding-bottom: 35rem; 
+.jumbotron {
+    background: rgba(39, 41, 41, 0.5);
+    width: 60%; 
+    margin: 5rem auto; 
 }
+/* 
+.carousel-caption {
+    padding-bottom: 15rem; 
+} */
 
 .carousel-inner {
     height: 800px; 
@@ -76,6 +81,18 @@
     padding-bottom: 25rem!important; 
 }
 
+.browse-trips {
+    margin: 1rem auto; 
+    text-align: center; 
+}
+
+.jumbo-header {
+    font-family: 'Lobster Two', cursive;
+}
+
+.jumbo-user-btn {
+    text-align: center; 
+}
 /* All Trips Page */
 
 @media only screen and (max-width:992px) {
