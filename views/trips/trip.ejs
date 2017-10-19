@@ -145,7 +145,14 @@ And a button that displays a modal of the activity details on click -->
                     <section id="activityDescription"> Description: </section>
                 </div>
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary edit-activity-button" data-dismiss="modal">Edit</button>
+                    <% if(currentUser) { %>
+                        <% var currentUserId = currentUser._id.toString() %>
+                    <% } %>
+                    <% var tripUserId = trip.user %>
+                    <% if(loggedIn && currentUserId == tripUserId) { %>
+                        <% console.log(currentUserId == tripUserId) %>
+                        <button type="button" class="btn btn-secondary edit-activity-button" data-dismiss="modal">Edit</button>
+                    <% } %>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
