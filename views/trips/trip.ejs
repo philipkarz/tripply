@@ -316,7 +316,7 @@ var globalActivityId
             url: '/trips/<%= trip._id %>/activity',
             method: 'POST',
             data: JSON.stringify(formData),
-            contentType: 'application/json'
+            contentType: 'application/json',
         })
         .done((data) => {
             console.log(data)
