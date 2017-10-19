@@ -67,10 +67,6 @@
     width: 60%; 
     margin: 5rem auto; 
 }
-/* 
-.carousel-caption {
-    padding-bottom: 15rem; 
-} */
 
 .carousel-inner {
     height: 800px; 
@@ -84,6 +80,12 @@
 .browse-trips {
     margin: 1rem auto; 
     text-align: center; 
+}
+
+.jumbotron-alt {
+    padding-top: 10%; 
+    padding-bottom: 10%;
+    background: rgba(154, 155, 155, 0.5); 
 }
 
 .jumbo-header {
