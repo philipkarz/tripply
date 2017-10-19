@@ -16,10 +16,13 @@ tripsRouter.route('/')
 tripsRouter.route('/:id')
     .get((req, res) => {
         Trip.findById(req.params.id, (err, trip) => {
-            Activity.find({trip: req.params.id}, (err, activities) => {
-                res.render('../views/trips/trip', {trip:trip, activities: activities})
-            })
             //res.json(trip)
+            Activity.find({trip: req.params.id}, (err, activities) => {
+                var sortedActivities = activities.sort(function(a, b) {
+                    return new Date(a.date).getTime() - new Date(b.date).getTime() 
+                })
+                res.render('../views/trips/trip', {trip:trip, activities: sortedActivities})
+            })
         })
     })
     .patch((req, res) => {
@@ -53,8 +56,9 @@ tripsRouter.route('/:id')
         newActivity.user = req.user
         newActivity.save((err, activity) => {
             console.log(req.params.id)
-            res.redirect(`/trips/${req.params.id}`)
-            //res.json({success: true, message: "Activity created!", activity})
+            res.json({success: true, message: "Activity created!", activity})
+            // res.redirect(`/trips/${req.params.id}`)
+            
         })
     })
 
