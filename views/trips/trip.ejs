@@ -26,29 +26,28 @@
 <!-- need to change the below section to be a div for each DAY
 In that day we want to see the name of each activity with the time (as list items)
 And a button that displays a modal of the activity details on click -->
-<div class='row day'>
+<div class="list-group" class='row day'>
     <% activities.forEach(function(a) { %>
     <div class='col-12'>
         <h3><%= a.date %></h3>
     </div>
-    <div class='row activities'>
-        <div class='col-4 activity-name'>
-            <h6><%= a.place %></h6>
+    <div class="list-group-item list-group-item-action" class='row activities'>
+        <div class="list-group-item list-group-item-action" class='col-4 activity-name'>
+            <h6>Place: <%= a.place %></h6>
         </div>
-        <div class='col-4 activity-time'>
-            <h6><%= a.time %></h6>
+        <div class="list-group-item list-group-item-action" class='col-4 activity-time'>
+            <h6>Time: <%= a.time %></h6>
         </div>
-        <div class='col-2'>
-            <h6><%= a.description %></h6>
+        <div class="list-group-item list-group-item-action" class='col-2'>
+            <h6>Description: <%= a.description %></h6>
         </div>
         <div class='col-1'>
             <!-- assign id to button based on objects db id to use in ajax request -->
-            <button id="<%= a._id %>" class="activity-button">See Details</button>
+            <button class="btn btn-primary" id="<%= a._id %>" class="activity-button">See Details</button>
         </div>
     </div>
     <% }) %>
 </div>
-
 <!-- <form action="/users/profile/edit">
 <button type="submit" id="update">Edit Profile</button>
 </form>	
