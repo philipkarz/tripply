@@ -64,13 +64,18 @@ module.exports = {
     },
 
     updateActivity: (req, res) => {
-        Activity.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedActivity) => {
+        console.log(req.body)
+        Activity.findByIdAndUpdate(req.params.activityId, req.body, {'new': true}, (err, updatedActivity) => {
+            // updatedActivity = req.body
+            if (err) console.log(err)
+            // res.redirect(`/trips/${req.params.tripId}`, {activity: updatedActivity})
+            // res.json({success: true, message: 'activity updated', activity: updatedActivity})
             res.json(updatedActivity)
         })
     },
 
     deleteActivity: (req, res) => {
-        Activity.findByIdAndRemove(req.params.id, (err, deletedActivity) => {
+        Activity.findByIdAndRemove(req.params.activityId, (err, deletedActivity) => {
             res.json({success: true, message: `${deletedActivity.place} has been deleted.`})
         })
     },

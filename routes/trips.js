@@ -13,7 +13,7 @@ tripsRouter.delete('/:id', tripsController.delete)
 tripsRouter.get('/:id/edit', tripsController.edit)
 tripsRouter.get('/:tripId/activities/:activityId', tripsController.showActivity)
 tripsRouter.post('/:id/activity', tripsController.createActivity)
-tripsRouter.patch('/:id/activity', tripsController.updateActivity)
-tripsRouter.delete('/:id/activity', tripsController.deleteActivity)
+tripsRouter.patch('/:tripId/activities/:activityId', tripsController.updateActivity)
+tripsRouter.delete('/:tripId/activities/:activityId', tripsController.deleteActivity)
     
 module.exports = tripsRouter
