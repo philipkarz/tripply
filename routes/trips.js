@@ -3,38 +3,20 @@ const
     passport = require('passport'),
     tripsRouter = new express.Router(),
     Trip = require('../models/Trip.js'),
-    Activity = require('../models/Activity.js')
+    Activity = require('../models/Activity.js'),
+    tripsController = require('../controllers/trips.js')
 
-tripsRouter.route('/')
-    .get((req, res) => {
-        Trip.find({}, (err, trips) => {
-            // res.json(trips)
-            res.render('../views/trips/all-trips', {trips:trips })
-        })
-    })
+
+
+tripsRouter.get('/', tripsController.index)
+tripsRouter.get('/:id', tripsController.show)
+tripsRouter.patch('/:id', tripsController.update)
+
+
 
     tripsRouter.route('/:id')
-    .get((req, res) => {
-        Trip.findById(req.params.id, (err, trip) => {
-            //res.json(trip)
-            Activity.find({trip: req.params.id}, (err, activities) => {
-                var sortedActivities = activities.sort(function(a, b) {
-                    return new Date(a.date).getTime() - new Date(b.date).getTime() 
-                })
-                res.render('../views/trips/trip', {trip:trip, activities: sortedActivities})
-            })
-        })
-    })
-    .patch((req, res) => {
-        Trip.findById(req.params.id, (err, trip) => {
-            trip = Object.assign(trip, req.body)
-            trip.save((err, updatedTrip) => {
-                if(err) return console.log(err)
-                res.redirect('/users/profile')
-            })
 
-        })
-    })
+
 
     .delete((req, res) => {
         Trip.findByIdAndRemove(req.params.id, (err, deletedTrip) => {
