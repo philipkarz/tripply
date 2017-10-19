@@ -40,7 +40,7 @@ tripsRouter.route('/:id')
     })
     
 
-    tripsRouter.route('/:id/activity')
+tripsRouter.route('/:id/activity')
     .get((req, res) => {
         Trip.findById(req.params.id, (err, trip) => {
             //res.json(trip)
@@ -56,30 +56,33 @@ tripsRouter.route('/:id')
         })
     })
 
-    .patch((req, res) => {
-        Activity.findByIdAndUpdate(req.params.id, req.body, {new:true}, (err, updatedActivity) => {
-            res.json(updatedActivity)
+tripsRouter.route('/:id/edit')
+    .get((req, res) => {
+        Trip.findById(req.params.id, (err, trip) => {
+            if(err) return console.log(err)
+            res.render('../views/trips/edit', {trip:trip})
         })
     })
 
+tripsRouter.route('/:tripId/activities/:activityId')
+    .get((req, res) => {
+        Activity.findById(req.params.activityId, (err, activity) => {
+            res.json(activity)
+        })
+    })
+    .patch((req, res) => {
+        console.log(req.body)
+        Activity.findByIdAndUpdate(req.params.activityId, req.body, {new: true}, (err, updatedActivity) => {
+            updatedActivity = req.body
+            if (err) console.log(err)
+            // res.redirect(`/trips/${req.params.tripId}`, {activity: updatedActivity})
+            res.json({success: true, message: 'activity updated', activity: updatedActivity})
+        })
+    })
     .delete((req, res) => {
         Activity.findByIdAndRemove(req.params.id, (err, deletedActivity) => {
             res.json({success: true, message: `${deletedActivity.place} has been deleted.`})
         })
     })
-
-tripsRouter.get('/:tripId/activities/:activityId', (req, res) => {
-    Activity.findById(req.params.activityId, (err, activity) => {
-        res.json(activity)
-    })
-}) 
-
-tripsRouter.route('/:id/edit')
-.get((req, res) => {
-    Trip.findById(req.params.id, (err, trip) => {
-        if(err) return console.log(err)
-        res.render('../views/trips/edit', {trip:trip})
-    })
-})
     
 module.exports = tripsRouter

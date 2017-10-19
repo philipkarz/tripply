@@ -134,11 +134,54 @@ And a button that displays a modal of the activity details on click -->
                     <section id="activityDescription"> Description: </section>
                 </div>
                 <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary edit-activity-button" data-dismiss="modal">Edit</button>
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
             </div>
         </div>
     </div>
+
+<!-- EDIT ACTIVITY MODAL --> 
+<div class="modal fade" id="editActivityModal" tabindex="-1" role="dialog" aria-labelledby="editActivityModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="exampleModalLabel">Edit Activity</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="edit-activity-form">
+                        <div id="edit-activity-place" class="form-group">
+                            <label for="name">Place</label>
+                            <input type="text" class="form-control" name="place">
+                        </div>
+                        <div class="form-group" data-provide="datepicker">
+                                <label for="date">Date</label>
+                                <input id="editActivityDate" type="text" class="form-control" name="date">
+                        </div>
+                        <div class="form-group">
+                            <label for="time">Time</label>
+                            <input id="editActivityTime" type="text" class="form-control" name="time">
+                        </div>
+                        <div class="form-group">
+                            <label for="description">Description</label>
+                            <input id="editActivityDescription" type="textarea" class="form-control" name="description">
+                        </div>
+                        <button id="edit-activity" type="submit" class="btn btn-primary">Edit Activity</button>
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <!-- NEED TO FIND A WAY TO GET THE EXACT ACTIVITY ID AND PUT IT IN THE ROUTE HERE -->
+                    <!-- <form method="post" action="/trips/<%= trip._id %>?_method=DELETE"></form>
+                        <button type="button" class="btn btn-secondary delete-activity-button" data-dismiss="modal">Delete Activity</button>
+                    </form> -->
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                </div>
+            </div>
+        </div>
+    </div>    
         
 <script>
 // Datepicker
@@ -175,6 +218,40 @@ $('.datepicker').datepicker({
                 $('#activityDescription').text('Description: ' + res.description)
             })
         })
+
+//EDIT ACTIVITY VIEW
+    // variable set
+    var $editActivityBtn = $('.edit-activity-button')
+    $editActivityBtn.on('click', function() {
+        $('#editActivityModal').modal()
+    })
+    var activityId = $('.activity-button').attr('id')
+    var $editActivityForm = $('#edit-activity-form')
+    $editActivityForm.on('submit', (evt) => {
+        evt.preventDefault()
+    var editFormData = {
+            "place": $('#edit-activity-form input[name=place]').val(),
+            "date": $('#edit-activity-form input[name=date]').val(),
+            "time": $('#edit-activity-form input[name=time]').val(),
+            "description": $('#edit-activity-form input[name=description]').val()
+    }
+    $.ajax({
+        url: '/trips/<%= trip._id %>/activities/' + activityId,
+        method: 'PATCH',
+        data: JSON.stringify(editFormData),
+        contentType: 'application/json'
+    })
+    .done((res) => {
+        console.log(res)
+        $('#editActivityModal').modal('hide')
+        /* Need to figure out the lines below in order to have the edit modal populate
+        the form by default */
+        $('#edit-activity-place').val(res.place)
+        $('#editActivityDate').val(res.date)
+        $('#editActivityTime').val(res.time)
+        $('#editActivityDescription').val(res.description)
+    })
+})
         
 // MANUAL ADD ACTIVITY
     $newActivityBtn.on('click', function() {
