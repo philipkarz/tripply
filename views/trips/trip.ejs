@@ -18,7 +18,7 @@
             <button class='btn btn-primary new-activity-button'>Add Activity</button>
         </div>
         <div class='col-2'>
-            <button id="new-activity-yelp" class='btn btn-primary'>Search Yelp</button>
+            <button id="new-activity-yelp" class='btn btn-danger'>Search Yelp</button>
         </div>
         <% } %>
     </div>
@@ -180,13 +180,13 @@ And a button that displays a modal of the activity details on click -->
                             <label for="description">Description</label>
                             <input id="editActivityDescription" type="textarea" class="form-control" name="description">
                         </div>
-                        <button id="edit-activity" type="submit" class="btn btn-primary">Edit Activity</button>
+                        <button id="edit-activity" type="submit" class="btn btn-info">Edit Activity</button>
                     </form>
                 </div>
                 <div class="modal-footer">
                     <!-- NEED TO FIND A WAY TO GET THE EXACT ACTIVITY ID AND PUT IT IN THE ROUTE HERE -->
                     <!-- <form method="post" action="/trips/<%= trip._id %>/activities/<%# activity._id %>?_method=DELETE"></form> -->
-                        <button id='delete-activity' type="button" class="btn btn-secondary delete-activity-button" data-dismiss="modal">Delete Activity</button>
+                        <button id='delete-activity' type="button" class="btn btn-danger delete-activity-button" data-dismiss="modal">Delete Activity</button>
                     <!-- </form> -->
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
                 </div>
