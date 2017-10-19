@@ -26,11 +26,12 @@
 <!-- need to change the below section to be a div for each DAY
 In that day we want to see the name of each activity with the time (as list items)
 And a button that displays a modal of the activity details on click -->
-<div class='row day'>
+<div class='list-group row day'>
     <% activities.forEach(function(a) { %>
     <div class='col-12'>
         <h3><%= a.date %></h3>
     </div>
+    <div class="list-group-item">
     <div class='row activities'>
         <div class='col-4 activity-name'>
             <h6><%= a.place %></h6>
@@ -43,9 +44,10 @@ And a button that displays a modal of the activity details on click -->
         </div>
         <div class='col-1'>
             <!-- assign id to button based on objects db id to use in ajax request -->
-            <button id="<%= a._id %>" class="activity-button">See Details</button>
+            <button id="<%= a._id %>" class="btn btn-primary activity-button">See Details</button>
         </div>
     </div>
+</div>
     <% }) %>
 </div>
 

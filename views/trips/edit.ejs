@@ -4,22 +4,28 @@
 
 
     <form method="post" action='/trips/<%= trip._id %>?_method=PATCH'>
-        <div class="form-group">
-                <label for="exampleInputEmail1">Name</label>
+        <div class="row">
+        <div class="col">
+                <label for="exampleFormControlInput1">Name</label>
                 <input type="name" name="name" class="form-control" id="exampleInputName1" aria-describedby="emailHelp" value="<%= trip.name %>" placeholder="Enter Name">
                
               </div>
-                <div class="form-group">
-                  <label for="exampleInputEmail1">Length</label>
+                <div class="col">
+                  <label for="exampleFormControlInput1">Length</label>
                   <input type="name" name="length" class="form-control" id="exampleInputEmail1" aria-describedby="emailHelp" value="<%= trip.length %>" placeholder="Enter Length">
                  
                 </div>
-                <div class="form-group">
-                  <label for="exampleInputPassword1">Locale</label>
+                <div class="col">
+                  <label for="exampleFormControlInput1">Locale</label>
                   <input type="name" name="locale" class="form-control" id="exampleInputEmail1" value="<%= trip.locale %>" placeholder="Enter Locale">
                 </div>
+                <div class="col">
+                        <label for="exampleFormControlTextarea1">Description</label>
+                        <textarea class="form-control" name="description" id="exampleFormControlTextarea1" rows="3" value="<%= trip.description %>" placeholder="Enter Description"></textarea>
+                      </div>
+    </div> 
                 <button type="submit" class="btn btn-primary">Update</button>
-              
+    
     </form>
 </br>
     <form method="post" action="/trips/<%= trip._id %>?_method=DELETE">
