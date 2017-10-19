@@ -79,6 +79,33 @@ module.exports = {
             res.json({success: true, message: `${deletedActivity.place} has been deleted.`})
         })
     },
+
+    // 1. look up the trip by id
+    // 2. hit the weather api for 10 day forecast,
+    // using trip's locale as the term
+    // 3. when you get data back from api,
+    // render a forecast view and show the 10 day forecast results
+    forecast: (req, res) => {
+        Trip.findById(req.params.id, (err, trip) => {
+            let locale = trip.locale
+            let url = `http://api.openweathermap.org/data/2.5/weather?q=${locale}&units=imperial&appid=${apiKey}`
+            
+            request(url, function (err, response, body) {
+                if(err){
+                    res.render('weather', {weather: null, error: 'Error, please try again'})
+                } else {
+                    let weather = JSON.parse(body)
+                //   if(weather.main == undefined){
+                //     res.render('weather', {weather: null, error: 'Error, please try again'})
+                //   } else {
+                //     let weatherText = `It's ${weather.main.temp} degrees in ${weather.name}!`
+                //     res.render('weather', {weather: weatherText, error: null})
+                //   }
+                }
+            })
+        })
+        
+    }
 }
 
 
