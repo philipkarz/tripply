@@ -1,8 +1,9 @@
+<div class="container">
 <h1>Edit <%= user.name %>'s Profile</h1>
 
 
 
-
+<div class="jumbotron">
     <form method="post" action='/users/profile?_method=PATCH'>
         <div class="form-group">
                 <label for="exampleInputEmail1">Name</label>
@@ -25,4 +26,6 @@
     <form method="post" action="/users/profile?_method=DELETE">
         <button type="submit" class="btn btn-danger" id="delete">Delete User</button>
     </form>
+</div>
+</div>
 
