@@ -71,3 +71,15 @@
     position: absolute; 
     padding-bottom: 25rem!important; 
 }
+
+/* Yelp Search Results */
+
+.select-button {
+    clear: both;
+    float:right;
+    margin-right: 15px;
+}
+
+.the-name {
+    display: inline;
+}
