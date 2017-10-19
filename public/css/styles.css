@@ -67,6 +67,10 @@
     padding-bottom: 35rem; 
 }
 
+.carousel-inner {
+    height: 800px; 
+}
+
 .canyon {
     position: absolute; 
     padding-bottom: 25rem!important; 
