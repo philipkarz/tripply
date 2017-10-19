@@ -274,6 +274,7 @@ var globalActivityId
             $('#activity-container-' + res._id).find('.activity-date').text(res.date)
             $('#activity-container-' + res._id).find('.activity-time').text(res.time)
             $('#activity-container-' + res._id).find('.activity-description').text(res.description)
+            location.reload();
         })
 })
 
