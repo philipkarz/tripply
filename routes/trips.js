@@ -8,18 +8,21 @@ const
 tripsRouter.route('/')
     .get((req, res) => {
         Trip.find({}, (err, trips) => {
-            res.json(trips)
-            // res.render('../views/trips/all-trips', {trips:trips })
+            // res.json(trips)
+            res.render('../views/trips/all-trips', {trips:trips })
         })
     })
 
-tripsRouter.route('/:id')
+    tripsRouter.route('/:id')
     .get((req, res) => {
         Trip.findById(req.params.id, (err, trip) => {
-            Activity.find({trip: req.params.id}, (err, activities) => {
-                res.render('../views/trips/trip', {trip:trip, activities: activities})
-            })
             //res.json(trip)
+            Activity.find({trip: req.params.id}, (err, activities) => {
+                var sortedActivities = activities.sort(function(a, b) {
+                    return new Date(a.date).getTime() - new Date(b.date).getTime() 
+                })
+                res.render('../views/trips/trip', {trip:trip, activities: sortedActivities})
+            })
         })
     })
     .patch((req, res) => {
