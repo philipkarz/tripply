@@ -55,7 +55,7 @@ And a button that displays a modal of the activity details on click -->
                     </button>
                 </div>
                 <div class="modal-body">
-                    <form id="new-activity-form">
+                    <form id="new-activity-form" action="/trips/<%= trip.id %>/activity" method="POST">
                         <div class="form-group">
                             <label for="name">Place</label>
                             <input type="text" class="form-control place-name" value="" name="place">
@@ -72,7 +72,7 @@ And a button that displays a modal of the activity details on click -->
                             <label for="description">Description</label>
                             <input type="textarea" class="form-control" name="description">
                         </div>
-                        <button id="add-activity" type="submit" class="btn btn-primary">Add Activity</button>
+                        <button id="add" type="submit" class="btn btn-primary">Add Activity</button>
                     </form>
                 </div>
                 <div class="modal-footer">
@@ -177,29 +177,34 @@ And a button that displays a modal of the activity details on click -->
         })
         
 // MANUAL ADD ACTIVITY
+
     $newActivityBtn.on('click', function() {
         $('#newActivityModal').modal()
     })
+
+
     var $newActivityForm = $('#new-activity-form')
-    $newActivityForm.on('submit', (evt) => {
+
+    $('#add').on('submit', (evt) => {
+        console.log('you clicked')
+        var formData = {
+            "place": $('input[name=place]').val(),
+            "date": $('input[name=date]').val(),
+            "time": $('input[name=time]').val(),
+            "description": $('input[name=description]').val()
+        }
+        $.ajax({
+            url: '/trips/<%= trip._id %>/activity',
+            method: 'POST',
+            data: JSON.stringify(formData),
+            contentType: 'application/json'
+        })
+        .done((data) => {
+            console.log(data)
+            $('#newActivityModal').modal('hide')
+        })
         evt.preventDefault()
-    var formData = {
-        "place": $('input[name=place]').val(),
-        "date": $('input[name=date]').val(),
-        "time": $('input[name=time]').val(),
-        "description": $('input[name=description]').val()
-    }
-    $.ajax({
-        url: '/trips/<%= trip._id %>/activity',
-        method: 'POST',
-        data: JSON.stringify(formData),
-        contentType: 'application/json'
     })
-    .done((data) => {
-        console.log(data)
-        $('#newActivityModal').modal('hide')
-    })
-})
 
 // YELP ADD ACTIVITY
  // ajax get request for search should be a concatenated string:
