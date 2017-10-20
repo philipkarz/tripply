@@ -72,26 +72,16 @@ app.get('/', (req, res) => {
 })
 
 //weather
-app.get('/weather', function (req, res) {
+  app.get('/weather', function (req, res) {
     res.render('weather', {weather: null, error: null});
   })
-  
-  app.post('/weather', function (req, res) {
-    let city = req.body.city
-    let url = `http://api.openweathermap.org/data/2.5/weather?q=${city}&units=imperial&appid=${apiKey}`
-  
+  app.get('/weather/:id', function(req, res) {
+    console.log(req.params)
+    let locale = req.params.id
+    let url = `http://api.openweathermap.org/data/2.5/weather?q=${locale}&units=imperial&appid=${apiKey}`
     request(url, function (err, response, body) {
-      if(err){
-        res.render('weather', {weather: null, error: 'Error, please try again'})
-      } else {
-        let weather = JSON.parse(body)
-        if(weather.main == undefined){
-          res.render('weather', {weather: null, error: 'Error, please try again'})
-        } else {
-          let weatherText = `It's ${weather.main.temp} degrees in ${weather.name}!`
-          res.render('weather', {weather: weatherText, error: null})
-        }
-      }
+    // res.send(body)
+        res.render('../views/weather',{ weather: JSON.parse(body) })
     })
   })
 

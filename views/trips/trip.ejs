@@ -2,6 +2,8 @@
     <div class='row'>
         <div class='col-6'>
             <h1><%= trip.name %></h1>
+            <button><a id="weatherlink" href="/weather/<%= trip.locale %>">Get <%= trip.locale %> Forecast</a></button>
+            <h1><%= trip.locale %></h1>
         </div>
 
        <!-- Determines whether to show Edit/Add buttons (no unless the trip belongs to the current user) -->
@@ -204,7 +206,20 @@ And a button that displays a modal of the activity details on click -->
 
 
 <script>
-    
+    var weather = $('#weather') 
+    weather.on('click', function(e) {
+    e.preventDefault()
+    var locale = trip.locale
+    $.ajax({
+        url: `/weather/${locale}`,
+        method: 'get'
+    })
+    .done((res) => {
+        redirect('/weather', res)
+        })
+    })
+
+
 var globalActivityId
 // DATEPICKER
     $('.datepicker').datepicker({
