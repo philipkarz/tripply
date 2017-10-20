@@ -216,6 +216,14 @@
 src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUxOM-484WU&callback=initMap">
 </script>
 <script>
+    map = new google.maps.Map(document.getElementById('map'), {
+        zoom: 16
+    })
+    marker = new google.maps.Marker({
+        map: map
+    })
+
+
     var weather = $('#weather') 
     weather.on('click', function(e) {
     e.preventDefault()
@@ -258,10 +266,10 @@ var globalActivityId
             })
             .done((res) => { 
                 $('#activityPlace').text('Place: ' + res.place)
+                $('#activityAddress').text('Address:' + res.address)
                 $('#activityDate').text('Date: ' + res.date)
                 $('#activityTime').text('Time: ' + res.time)
                 $('#activityDescription').text('Description: ' + res.description)
-
                 $('#edit-activity-place').val(res.place)
                 $('#editActivityDate').val(res.date)
                 $('#editActivityTime').val(res.time)
