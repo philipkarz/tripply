@@ -112,6 +112,10 @@
                             <label for="name">Place</label>
                             <input type="text" class="form-control place-name" value="" name="place">
                         </div>
+                        <div class="form-group">
+                            <label for="name">Address</label>
+                            <input type="text" class="form-control address-name" value="" name="address">
+                        </div>
                         <div class="form-group" data-provide="datepicker">
                                 <label for="date">Date</label>
                                 <input type="text" class="form-control" name="date">
@@ -151,10 +155,9 @@
                     <label for="name">Search Term</label>
                     <input type="text" class="form-control term" name="term">
                 </div>
-
                 <div class="form-group">
                     <label for="local">Location</label>
-                    <input type="text" class="form-control loc" name="location">
+                    <input type="text" class="form-control loc" value="<%= trip.locale %>" name="location">
                 </div>
 
                 <button id="search" type="submit" class="btn btn-primary">Search</button>
@@ -368,6 +371,7 @@ var globalActivityId
         console.log('you clicked')
         var formData = {
             "place": $('input[name=place]').val(),
+            "address": $('input[address]').val(),
             "date": $('input[name=date]').val(),
             "time": $('input[name=time]').val(),
             "description": $('input[name=description]').val()
@@ -395,20 +399,20 @@ var globalActivityId
     $yelpActivityBtn.on('click', function() {
         $('#yelpActivityModal').modal()
         $searchRes.html('')
-        $loc.val('')
+        //$loc.val('')
         $term.val('')
     })
 
     $yelpActivityForm.on('submit', (evt) => {
-        console.log('clicked submit')
-        console.log($('select[name=sort_by]'))
+        //console.log('clicked submit')
+        //console.log($('select[name=sort_by]'))
         evt.preventDefault()
         var formData = {
             "term": $('input[name=term]').val(),
             "location": $('input[name=location]').val(),
             "limit": 5,
         }
-        console.log(formData)
+        //console.log(formData)
         var term = formData.term
         var location = formData.location
         var limit = formData.limit
@@ -420,7 +424,7 @@ var globalActivityId
         })
         .done((res) => {
             populate(res)
-            console.log(res)
+            //console.log(res)
         })
     })
 
@@ -432,18 +436,19 @@ var globalActivityId
             var img = $('<img>').addClass('card-img-top').attr("src", item.image_url)
             var cardBody = $('<div>').addClass('card-body')
             var h4 = $('<h4>').addClass('card-title').text(item.name)
+            var p = $('<p>').text(`${item.location.address1}, ${item.location.city} ${item.location.zip_code}`)
             var ul = $('<ul>')
             var liRating = $('<li>').text("Rating: " + item.rating)
             var liDistance = $('<li>').text("Distance away: " + (item.distance * 0.000621371192).toFixed(2) + " mi")
-            var liAddress = $('<li>').text("Address: " + item.location.address1 + ", " + item.location.city + " " + item.location.zip_code)
+            //var liAddress = $('<li>').text("Address: " + item.location.address1 + ", " + item.location.city + " " + item.location.zip_code)
             var liSeeMore = $('<li>')
             var yelpButton = $('<a>').attr("href", item.url).text('See More on Yelp')
             var selectButton = $('<button>').addClass('select-button').text("Select")
             var itemPrice = item.price
             var liPrice = checkPrice(itemPrice)
             liSeeMore.append(yelpButton)                    
-            ul.append(liRating, liDistance, liAddress, liPrice, liSeeMore)
-            cardBody.append(h4, selectButton, ul)
+            ul.append(liRating, liDistance,liPrice, liSeeMore)
+            cardBody.append(h4, selectButton, p, ul)
             card.append(img, cardBody)
             $searchRes.append(card)
             function checkPrice(itemPrice) {
@@ -455,10 +460,14 @@ var globalActivityId
     }
     
     $('body').on('click', '.select-button', function() {
-        var item = $(this).prev()
-        selectedPlace = item.text()
-        console.log(selectedPlace)
+        var place = $(this).prev()
+        var address = $(this).next()
+        selectedPlace = place.text()
+        selectedAddress = address.text()
+        //console.log(selectedPlace)
+        //console.log(selectedAddress)
         checkPlace(selectedPlace)
+        checkAddress(selectedAddress)
         $('#yelpActivityModal').modal('hide')   
         $('#newActivityModal').modal()
     })
@@ -467,14 +476,22 @@ var globalActivityId
     var $nameInput = $('.place-name')
     function checkPlace(selectedPlace) {
         if(selectedPlace != '') {
-            console.log(selectedPlace)
-            console.log($nameInput)
+            //console.log(selectedPlace)
+            //console.log($nameInput)
             $nameInput.val(selectedPlace)
         }
     }
     
 
-// LOOP
+    var $addressInput = $('.address-name')
+    function checkAddress(selectedAddress) {
+        if(selectedAddress != '') {
+            //console.log(selectedAddress)
+            //console.log($addressInput)
+            $addressInput.val(selectedAddress)
+        }
+    }
+
 
 
 
