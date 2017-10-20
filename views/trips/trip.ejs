@@ -109,7 +109,7 @@
                 <div class="modal-body">
                     <form id="new-activity-form" action="/trips/<%= trip.id %>/activity" method="POST">
                         <div class="form-group">
-                            <label for="name">Place</label>
+                            <label for="name">Place*</label>
                             <input type="text" class="form-control place-name" value="" name="place">
                         </div>
                         <div class="form-group">
@@ -117,7 +117,7 @@
                             <input type="text" class="form-control address-name" value="" name="address">
                         </div>
                         <div class="form-group" data-provide="datepicker">
-                                <label for="date">Date</label>
+                                <label for="date">Date*</label>
                                 <input type="text" class="form-control" name="date">
                         </div>
                         <div class="form-group">
@@ -185,6 +185,7 @@
                 </div>
                 <div class="modal-body">
                     <section id="activityPlace"> Place: </section>
+                    <section id="activityAddress"> Address: </section>
                     <section id="activityDate"> Date: </section>
                     <section id="activityTime"> Time: </section>
                     <section id="activityDescription"> Description: </section>
@@ -291,6 +292,7 @@ var globalActivityId
             })
             .done((res) => { 
                 $('#activityPlace').text('Place: ' + res.place)
+                $('#activityAddress').text('Address: ' + res.address)
                 $('#activityDate').text('Date: ' + res.date)
                 $('#activityTime').text('Time: ' + res.time)
                 $('#activityDescription').text('Description: ' + res.description)
