@@ -289,3 +289,11 @@ p.weather-info {
 .forecast-name {
     font-size: 3rem; 
 }
+
+.container {
+    margin-bottom: 5rem; 
+}
+
+.footer {
+    margin-top: 1rem; 
+}
