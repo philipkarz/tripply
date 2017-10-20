@@ -2,27 +2,39 @@
     <div class='row'>
         <div class='col-6'>
             <h1><%= trip.name %></h1>
-            <button><a id="weatherlink" href="/weather/<%= trip.locale %>">Get <%= trip.locale %> Forecast</a></button>
-            <h1><%= trip.locale %></h1>
         </div>
+        <div class='col-6'>
+            <div class='row trip-ejs-header-btns'>
+                <!-- Determines whether to show Edit/Add buttons (no unless the trip belongs to the current user) -->
+                <% if(currentUser) { %>
+                    <% var currentUserId = currentUser._id.toString() %>
+                <% } %>
+                <% var tripUserId = trip.user %>
+                <% if(loggedIn && currentUserId == tripUserId) { %>
+                    <% console.log(currentUserId == tripUserId) %>
+                <div class='trip-edit-tripejs'>
+                    <a class='btn btn-info' href='/trips/<%= trip._id %>/edit'>Edit Trip</a>
+                </div>
+                <div class='add-activity-tripejs'>
+                    <button class='btn btn-primary new-activity-button'>Add Activity</button>
+                </div>
+                <div class='add-activity-yelp-tripejs'>
+                    <button id="new-activity-yelp" class='btn btn-danger'>Search Yelp</button>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-4'>
+            <h4>Destination: <%= trip.locale %></h4>
+        </div>
+        <div class='col-4'>
 
-       <!-- Determines whether to show Edit/Add buttons (no unless the trip belongs to the current user) -->
-        <% if(currentUser) { %>
-            <% var currentUserId = currentUser._id.toString() %>
-        <% } %>
-        <% var tripUserId = trip.user %>
-        <% if(loggedIn && currentUserId == tripUserId) { %>
-            <% console.log(currentUserId == tripUserId) %>
-        <div class='col-2'>
-            <a class='btn btn-info' href='/trips/<%= trip._id %>/edit'>Edit Trip</a>
         </div>
-        <div class='col-2'>
-            <button class='btn btn-primary new-activity-button'>Add Activity</button>
+        <div class='col-4 forecast-btn'>
+            <button><a id="weatherlink" href="/weather/<%= trip.locale %>">Get Forecast</a></button>
         </div>
-        <div class='col-2'>
-            <button id="new-activity-yelp" class='btn btn-danger'>Search Yelp</button>
-        </div>
-        <% } %>
     </div>
 
 
@@ -35,24 +47,46 @@
             <% xDate = x.valueOf() %>
             <!-- <%= aDate == xDate %> -->
             <% if(aDate == xDate) { %>
-            <div id='activity-container-<%= a._id %>' class='list-group'>
+            <!-- at large and xl screens -->
+            <div id='activity-container-<%= a._id %>' class='list-group card  d-none d-lg-block' style='width: 90%;'>
                 <div class="list-group-item">
                     <div class='row activities'>
-                        <div class='col-4 activity-time'>
+                        <div class='col-3 activity-time'>
                             <h6 class='activity-time'><%= a.time %></h6>
                         </div>
-                        <div class='col-4 activity-name'>
+                        <div class='col-3 activity-name'>
                             <h6 class='activity-place'><%= a.place %></h6>
                         </div>
-                        <div class='col-2'>
+                        <div class='col-3'>
                             <h6 class='activity-description'><%= a.description %></h6>
                         </div>
-                        <div class='col-1'>
+                        <div class='col-3'>
                             <button id="<%= a._id %>" class="btn btn-primary activity-button">See Details</button>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- At small and medium screens -->
+            <div id='activity-container-<%= a._id %>' class='list-group card d-lg-none' style='width: 90%;'>
+                    <div class="list-group-item">
+                        <div class='row activities'>
+                            <div class='col-6 activity-time'>
+                                <h6 class='activity-time'><%= a.time %></h6>
+                            </div>
+                            <div class='col-6 activity-name'>
+                                <h6 class='activity-place'><%= a.place %></h6>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-6'>
+                                <h6 class='activity-description'><%= a.description %></h6>
+                            </div>
+                            <div class='col-6  view-activity'>
+                                <button id="<%= a._id %>" class="btn btn-primary activity-button">View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <% } %>
         <% }) %>
     <% } %> 
@@ -75,11 +109,15 @@
                 <div class="modal-body">
                     <form id="new-activity-form" action="/trips/<%= trip.id %>/activity" method="POST">
                         <div class="form-group">
-                            <label for="name">Place</label>
+                            <label for="name">Place*</label>
                             <input type="text" class="form-control place-name" value="" name="place">
                         </div>
+                        <div class="form-group">
+                            <label for="name">Address</label>
+                            <input type="text" class="form-control address-name" value="" name="address">
+                        </div>
                         <div class="form-group" data-provide="datepicker">
-                                <label for="date">Date</label>
+                                <label for="date">Date*</label>
                                 <input type="text" class="form-control" name="date">
                         </div>
                         <div class="form-group">
@@ -117,10 +155,9 @@
                     <label for="name">Search Term</label>
                     <input type="text" class="form-control term" name="term">
                 </div>
-
                 <div class="form-group">
                     <label for="local">Location</label>
-                    <input type="text" class="form-control loc" name="location">
+                    <input type="text" class="form-control loc" value="<%= trip.locale %>" name="location">
                 </div>
 
                 <button id="search" type="submit" class="btn btn-primary">Search</button>
@@ -148,6 +185,7 @@
                 </div>
                 <div class="modal-body">
                     <section id="activityPlace"> Place: </section>
+                    <section id="activityAddress"> Address: </section>
                     <section id="activityDate"> Date: </section>
                     <section id="activityTime"> Time: </section>
                     <section id="activityDescription"> Description: </section>
@@ -254,6 +292,7 @@ var globalActivityId
             })
             .done((res) => { 
                 $('#activityPlace').text('Place: ' + res.place)
+                $('#activityAddress').text('Address: ' + res.address)
                 $('#activityDate').text('Date: ' + res.date)
                 $('#activityTime').text('Time: ' + res.time)
                 $('#activityDescription').text('Description: ' + res.description)
@@ -334,6 +373,7 @@ var globalActivityId
         console.log('you clicked')
         var formData = {
             "place": $('input[name=place]').val(),
+            "address": $('input[address]').val(),
             "date": $('input[name=date]').val(),
             "time": $('input[name=time]').val(),
             "description": $('input[name=description]').val()
@@ -361,20 +401,20 @@ var globalActivityId
     $yelpActivityBtn.on('click', function() {
         $('#yelpActivityModal').modal()
         $searchRes.html('')
-        $loc.val('')
+        //$loc.val('')
         $term.val('')
     })
 
     $yelpActivityForm.on('submit', (evt) => {
-        console.log('clicked submit')
-        console.log($('select[name=sort_by]'))
+        //console.log('clicked submit')
+        //console.log($('select[name=sort_by]'))
         evt.preventDefault()
         var formData = {
             "term": $('input[name=term]').val(),
             "location": $('input[name=location]').val(),
             "limit": 5,
         }
-        console.log(formData)
+        //console.log(formData)
         var term = formData.term
         var location = formData.location
         var limit = formData.limit
@@ -386,7 +426,7 @@ var globalActivityId
         })
         .done((res) => {
             populate(res)
-            console.log(res)
+            //console.log(res)
         })
     })
 
@@ -398,18 +438,19 @@ var globalActivityId
             var img = $('<img>').addClass('card-img-top').attr("src", item.image_url)
             var cardBody = $('<div>').addClass('card-body')
             var h4 = $('<h4>').addClass('card-title').text(item.name)
+            var p = $('<p>').text(`${item.location.address1}, ${item.location.city} ${item.location.zip_code}`)
             var ul = $('<ul>')
             var liRating = $('<li>').text("Rating: " + item.rating)
             var liDistance = $('<li>').text("Distance away: " + (item.distance * 0.000621371192).toFixed(2) + " mi")
-            var liAddress = $('<li>').text("Address: " + item.location.address1 + ", " + item.location.city + " " + item.location.zip_code)
+            //var liAddress = $('<li>').text("Address: " + item.location.address1 + ", " + item.location.city + " " + item.location.zip_code)
             var liSeeMore = $('<li>')
             var yelpButton = $('<a>').attr("href", item.url).text('See More on Yelp')
             var selectButton = $('<button>').addClass('select-button').text("Select")
             var itemPrice = item.price
             var liPrice = checkPrice(itemPrice)
             liSeeMore.append(yelpButton)                    
-            ul.append(liRating, liDistance, liAddress, liPrice, liSeeMore)
-            cardBody.append(h4, selectButton, ul)
+            ul.append(liRating, liDistance,liPrice, liSeeMore)
+            cardBody.append(h4, selectButton, p, ul)
             card.append(img, cardBody)
             $searchRes.append(card)
             function checkPrice(itemPrice) {
@@ -421,10 +462,14 @@ var globalActivityId
     }
     
     $('body').on('click', '.select-button', function() {
-        var item = $(this).prev()
-        selectedPlace = item.text()
-        console.log(selectedPlace)
+        var place = $(this).prev()
+        var address = $(this).next()
+        selectedPlace = place.text()
+        selectedAddress = address.text()
+        //console.log(selectedPlace)
+        //console.log(selectedAddress)
         checkPlace(selectedPlace)
+        checkAddress(selectedAddress)
         $('#yelpActivityModal').modal('hide')   
         $('#newActivityModal').modal()
     })
@@ -433,14 +478,22 @@ var globalActivityId
     var $nameInput = $('.place-name')
     function checkPlace(selectedPlace) {
         if(selectedPlace != '') {
-            console.log(selectedPlace)
-            console.log($nameInput)
+            //console.log(selectedPlace)
+            //console.log($nameInput)
             $nameInput.val(selectedPlace)
         }
     }
     
 
-// LOOP
+    var $addressInput = $('.address-name')
+    function checkAddress(selectedAddress) {
+        if(selectedAddress != '') {
+            //console.log(selectedAddress)
+            //console.log($addressInput)
+            $addressInput.val(selectedAddress)
+        }
+    }
+
 
 
 
