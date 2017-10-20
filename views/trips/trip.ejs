@@ -2,27 +2,39 @@
     <div class='row'>
         <div class='col-6'>
             <h1><%= trip.name %></h1>
-            <button><a id="weatherlink" href="/weather/<%= trip.locale %>">Get <%= trip.locale %> Forecast</a></button>
-            <h1><%= trip.locale %></h1>
         </div>
+        <div class='col-6'>
+            <div class='row trip-ejs-header-btns'>
+                <!-- Determines whether to show Edit/Add buttons (no unless the trip belongs to the current user) -->
+                <% if(currentUser) { %>
+                    <% var currentUserId = currentUser._id.toString() %>
+                <% } %>
+                <% var tripUserId = trip.user %>
+                <% if(loggedIn && currentUserId == tripUserId) { %>
+                    <% console.log(currentUserId == tripUserId) %>
+                <div class='trip-edit-tripejs'>
+                    <a class='btn btn-info' href='/trips/<%= trip._id %>/edit'>Edit Trip</a>
+                </div>
+                <div class='add-activity-tripejs'>
+                    <button class='btn btn-primary new-activity-button'>Add Activity</button>
+                </div>
+                <div class='add-activity-yelp-tripejs'>
+                    <button id="new-activity-yelp" class='btn btn-danger'>Search Yelp</button>
+                </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <div class='row'>
+        <div class='col-4'>
+            <h4>Destination: <%= trip.locale %></h4>
+        </div>
+        <div class='col-4'>
 
-       <!-- Determines whether to show Edit/Add buttons (no unless the trip belongs to the current user) -->
-        <% if(currentUser) { %>
-            <% var currentUserId = currentUser._id.toString() %>
-        <% } %>
-        <% var tripUserId = trip.user %>
-        <% if(loggedIn && currentUserId == tripUserId) { %>
-            <% console.log(currentUserId == tripUserId) %>
-        <div class='col-2'>
-            <a class='btn btn-info' href='/trips/<%= trip._id %>/edit'>Edit Trip</a>
         </div>
-        <div class='col-2'>
-            <button class='btn btn-primary new-activity-button'>Add Activity</button>
+        <div class='col-4 forecast-btn'>
+            <button><a id="weatherlink" href="/weather/<%= trip.locale %>">Get Forecast</a></button>
         </div>
-        <div class='col-2'>
-            <button id="new-activity-yelp" class='btn btn-danger'>Search Yelp</button>
-        </div>
-        <% } %>
     </div>
 
 
@@ -35,24 +47,46 @@
             <% xDate = x.valueOf() %>
             <!-- <%= aDate == xDate %> -->
             <% if(aDate == xDate) { %>
-            <div id='activity-container-<%= a._id %>' class='list-group'>
+            <!-- at large and xl screens -->
+            <div id='activity-container-<%= a._id %>' class='list-group card  d-none d-lg-block' style='width: 90%;'>
                 <div class="list-group-item">
                     <div class='row activities'>
-                        <div class='col-4 activity-time'>
+                        <div class='col-3 activity-time'>
                             <h6 class='activity-time'><%= a.time %></h6>
                         </div>
-                        <div class='col-4 activity-name'>
+                        <div class='col-3 activity-name'>
                             <h6 class='activity-place'><%= a.place %></h6>
                         </div>
-                        <div class='col-2'>
+                        <div class='col-3'>
                             <h6 class='activity-description'><%= a.description %></h6>
                         </div>
-                        <div class='col-1'>
+                        <div class='col-3'>
                             <button id="<%= a._id %>" class="btn btn-primary activity-button">See Details</button>
                         </div>
                     </div>
                 </div>
             </div>
+            <!-- At small and medium screens -->
+            <div id='activity-container-<%= a._id %>' class='list-group card d-lg-none' style='width: 90%;'>
+                    <div class="list-group-item">
+                        <div class='row activities'>
+                            <div class='col-6 activity-time'>
+                                <h6 class='activity-time'><%= a.time %></h6>
+                            </div>
+                            <div class='col-6 activity-name'>
+                                <h6 class='activity-place'><%= a.place %></h6>
+                            </div>
+                        </div>
+                        <div class='row'>
+                            <div class='col-6'>
+                                <h6 class='activity-description'><%= a.description %></h6>
+                            </div>
+                            <div class='col-6  view-activity'>
+                                <button id="<%= a._id %>" class="btn btn-primary activity-button">View</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
             <% } %>
         <% }) %>
     <% } %> 
