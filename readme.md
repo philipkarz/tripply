@@ -87,7 +87,7 @@ Home page: https://wireframe.cc/EEopei
 Main user page: https://wireframe.cc/k2EUyp
 All trips page: https://wireframe.cc/EcsXVW
 
-Data Models: 
+Data Models: https://ga-students.slack.com/files/U6GV09FK8/F7K3R5WCE/20171013_152815.jpg
 
 Presentation Deck: 
 
