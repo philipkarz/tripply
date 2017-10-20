@@ -220,6 +220,16 @@
     margin-top: -2rem!important; 
 }
 
+
+/*
+MAP
+*/
+
+#map {
+    height: 200px;
+    width: 100%;
+}
+
 /* Edit trip view styles */
 .edit-trip-back {
     text-align: right; 
@@ -265,4 +275,27 @@
 
 .view-activity {
     text-align: right; 
+}
+
+/* Weather ejs page  */
+.weather-page {
+    padding: 5%!important;
+    width: 80%!important; 
+    background: rgb(109,179,242)!important; /* Old browsers */
+    background: -moz-linear-gradient(top, rgba(109,179,242,1) 0%, rgba(84,163,238,1) 50%, rgba(54,144,240,1) 82%, rgba(54,144,240,1) 82%, rgba(30,105,222,1) 100%)!important; /* FF3.6-15 */
+    background: -webkit-linear-gradient(top, rgba(109,179,242,1) 0%,rgba(84,163,238,1) 50%,rgba(54,144,240,1) 82%,rgba(54,144,240,1) 82%,rgba(30,105,222,1) 100%)!important; /* Chrome10-25,Safari5.1-6 */
+    background: linear-gradient(to bottom, rgba(109,179,242,1) 0%,rgba(84,163,238,1) 50%,rgba(54,144,240,1) 82%,rgba(54,144,240,1) 82%,rgba(30,105,222,1) 100%)!important; /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+    filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#6db3f2', endColorstr='#1e69de',GradientType=0 ); /* IE6-9 */
+}
+
+.forecast-back {
+    text-align: right; 
+}
+
+p.weather-info {
+    font-size: 2rem; 
+}
+
+.forecast-name {
+    font-size: 3rem; 
 }
