@@ -225,6 +225,13 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
     var latitude
     var longitude
 
+    $('#activityModal').on('shown.bs.modal', function() {
+        var uluru = {lat: latitude, lng: longitude}
+        google.maps.event.trigger(map, 'resize')
+        marker.setPosition(uluru)
+        map.setCenter(uluru)
+    })
+
 
     var weather = $('#weather') 
     weather.on('click', function(e) {
