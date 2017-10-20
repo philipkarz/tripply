@@ -82,9 +82,9 @@
     border-radius: 6px; 
 }
 
-.activities {
+/* .activities {
     margin-left: 4rem; 
-}
+} */
 
 /* Navbar styles */
 .navbar-brand {
@@ -235,4 +235,34 @@
 
 .edit-profile-jumbo {
     margin: 3rem auto!important; 
+}
+
+/* Styles for trip ejs */
+.trip-edit-tripejs {
+    text-align: left;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+.add-activity-tripejs {
+    text-align: center;
+    margin-right: 1rem;
+    margin-left: 1rem;
+}
+
+.add-activity-yelp-tripejs {
+    text-align: right; 
+    margin-left: 1rem;
+}
+
+.trip-ejs-header-btns {
+    margin: 0 auto; 
+}
+
+.forecast-btn {
+    text-align: center; 
+}
+
+.view-activity {
+    text-align: right; 
 }
