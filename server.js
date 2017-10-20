@@ -5,7 +5,7 @@ const
     mongoose = require('mongoose'),
     app = express(),
     bodyParser = require('body-parser'),
-    cookieParser = require('cookie-parser')
+    cookieParser = require('cookie-parser'),
     mongoDBURL = 'mongodb://localhost/tripply',
     ejsLayouts = require('express-ejs-layouts'),
     tripsRoutes = require('./routes/trips.js'),
@@ -19,6 +19,7 @@ const
     yelp = require('yelp-fusion'),
     request = require('request'),
     argv = require('yargs').argv,
+    moment = require('moment'),
     clientId = process.env.CLIENT_ID,
     clientSecret = process.env.CLIENT_SECRET
 

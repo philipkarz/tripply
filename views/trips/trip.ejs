@@ -25,34 +25,40 @@
         <% } %>
     </div>
 
-<!-- need to change the below section to be a div for each DAY
-In that day we want to see the name of each activity with the time (as list items)
-And a button that displays a modal of the activity details on click -->
 
-    <% activities.forEach(function(a) { %>
-        <div id='activity-container-<%= a._id %>' class='list-group row day'>
-            <div class='col-12' >
-                <h3 class='activity-date'><%= a.date %></h3>
-            </div>
-            <div class="list-group-item">
-                <div class='row activities'>
-                    <div class='col-4 activity-name'>
-                        <h6 class='activity-place'><%= a.place %></h6>
-                    </div>
-                    <div class='col-4 activity-time'>
-                        <h6 class='activity-time'><%= a.time %></h6>
-                    </div>
-                    <div class='col-2'>
-                        <h6 class='activity-description'><%= a.description %></h6>
-                    </div>
-                    <div class='col-1'>
-                        <!-- assign id to button based on objects db id to use in ajax request -->
-                        <button id="<%= a._id %>" class="btn btn-primary activity-button">See Details</button>
+    <% for(var i = trip.startDate.valueOf(); i <= trip.endDate.valueOf(); i += 86400000 ) { %> 
+        <% x = new Date(i) %>
+        <hr>
+        <div><h3><%= x.toDateString() %> </h3></div>
+        <% activities.forEach(function(a) { %>
+            <% aDate = Date.parse(a.date)%>
+            <% xDate = x.valueOf() %>
+            <!-- <%= aDate == xDate %> -->
+            <% if(aDate == xDate) { %>
+            <div id='activity-container-<%= a._id %>' class='list-group'>
+                <div class="list-group-item">
+                    <div class='row activities'>
+                        <div class='col-4 activity-time'>
+                            <h6 class='activity-time'><%= a.time %></h6>
+                        </div>
+                        <div class='col-4 activity-name'>
+                            <h6 class='activity-place'><%= a.place %></h6>
+                        </div>
+                        <div class='col-2'>
+                            <h6 class='activity-description'><%= a.description %></h6>
+                        </div>
+                        <div class='col-1'>
+                            <button id="<%= a._id %>" class="btn btn-primary activity-button">See Details</button>
+                        </div>
                     </div>
                 </div>
             </div>
-        </div>
-    <% }) %>
+            <% } %>
+        <% }) %>
+    <% } %> 
+
+
+    
 
 
 
@@ -265,9 +271,7 @@ var globalActivityId
     // variable set
     var $editActivityBtn = $('.edit-activity-button')
     $editActivityBtn.on('click', function() {
-        
         $('#editActivityModal').modal()
-
     })
     
     var $editActivityForm = $('#edit-activity-form')
@@ -435,6 +439,8 @@ var globalActivityId
         }
     }
     
+
+// LOOP
 
 
 
