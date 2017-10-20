@@ -121,10 +121,9 @@
                     <label for="name">Search Term</label>
                     <input type="text" class="form-control term" name="term">
                 </div>
-
                 <div class="form-group">
                     <label for="local">Location</label>
-                    <input type="text" class="form-control loc" name="location">
+                    <input type="text" class="form-control loc" value="<%= trip.locale %>" name="location">
                 </div>
 
                 <button id="search" type="submit" class="btn btn-primary">Search</button>
@@ -366,20 +365,20 @@ var globalActivityId
     $yelpActivityBtn.on('click', function() {
         $('#yelpActivityModal').modal()
         $searchRes.html('')
-        $loc.val('')
+        //$loc.val('')
         $term.val('')
     })
 
     $yelpActivityForm.on('submit', (evt) => {
-        console.log('clicked submit')
-        console.log($('select[name=sort_by]'))
+        //console.log('clicked submit')
+        //console.log($('select[name=sort_by]'))
         evt.preventDefault()
         var formData = {
             "term": $('input[name=term]').val(),
             "location": $('input[name=location]').val(),
             "limit": 5,
         }
-        console.log(formData)
+        //console.log(formData)
         var term = formData.term
         var location = formData.location
         var limit = formData.limit
@@ -391,7 +390,7 @@ var globalActivityId
         })
         .done((res) => {
             populate(res)
-            console.log(res)
+            //console.log(res)
         })
     })
 
