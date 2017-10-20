@@ -9,18 +9,41 @@
   <body>
     <div class="container">
       <fieldset>
-        <form action="/weather" method="post">
-          <input name="city" type="text" class="ghost-input" placeholder="Enter a City" required>
-          <input type="submit" class="ghost-button" value="Get Weather">
-        </form>
         <% if(weather !== null){ %>
-          <p><%= weather %></p>
+          <p>Humidity <%= weather.main.humidity %></p>
+          
         <% } %>
-
-        <% if(error !== null){ %>
-          <p><%= error %></p>
-        <% } %>
+        { id: 'Los Angeles' }
+        { coord: { lon: -118.24, lat: 34.05 },
+          weather: [ { id: 721, main: 'Haze', description: 'haze', icon: '50d' } ],
+          base: 'stations',
+          main: 
+           { temp: 72.21,
+             pressure: 1011,
+             humidity: 68,
+             temp_min: 69.8,
+             temp_max: 75.2 },
+          visibility: 14484,
+          wind: { speed: 3.36 },
+          clouds: { all: 1 },
+          dt: 1508457480,
+          sys: 
+           { type: 1,
+             id: 416,
+             message: 0.005,
+             country: 'US',
+             sunrise: 1508508147,
+             sunset: 1508548340 },
+          id: 5368361,
+          name: 'Los Angeles',
+          cod: 200 }
       </fieldset>
     </div>
+
+    <script>
+      
+    </script>
+
+
   </body>
 </html>
