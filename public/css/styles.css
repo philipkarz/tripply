@@ -36,6 +36,22 @@
     margin-top: 1rem; 
 }
 
+.date-show {
+    text-align: right; 
+}
+
+.details-show {
+    text-align: right; 
+}
+
+.profile-edit {
+    text-align: right; 
+}
+
+.new-trip-button-div {
+    text-align: right; 
+}
+
 /* Styles for the trip.ejs page */
 .trip-page {
     margin-top: 2rem; 
