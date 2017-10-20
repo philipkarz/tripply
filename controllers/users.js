@@ -1,5 +1,4 @@
 const
-    
     passport = require('passport'),
     User = require('../models/User.js'),
     Trip = require('../models/Trip.js')
