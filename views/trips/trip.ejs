@@ -262,7 +262,14 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
         })
         var latitude
         var longitude
+        $('#activityModal').on('shown.bs.modal', function() {
+            var uluru = {lat: latitude, lng: longitude}
+            google.maps.event.trigger(map, 'resize')
+            marker.setPosition({lat: latitude, lng: longitude})
+            map.setCenter({lat: latitude, lng: longitude})
+        })
 
+        
         var weather = $('#weather') 
         weather.on('click', function(e) {
         e.preventDefault()
@@ -292,7 +299,6 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
         // activity show stuff
             // activity detail click function
             $activityButton.on('click', function() {
-                
                 var activityId = $(this).attr('id')
                 console.log($(this).attr('id'))
                 // show modal on click
@@ -313,8 +319,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
                     $('#editActivityDate').val(res.date)
                     $('#editActivityTime').val(res.time)
                     $('#editActivityDescription').val(res.description)
-                    var addy = res.address
-                                    
+                    var addy = res.address         
                     geocoder = new google.maps.Geocoder()
                     if(geocoder) {
                         geocoder.geocode({
@@ -329,15 +334,10 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
                             }
                         })
                     }
-                    $('#activityModal').modal()
-                    $('#activityModal').on('shown.bs.modal', function() {
-                        var uluru = {lat: latitude, lng: longitude}
-                        google.maps.event.trigger(map, 'resize')
-                        marker.setPosition(uluru)
-                        map.setCenter(uluru)
-                    })
+                    
                     globalActivityId = activityId
                 })
+                $('#activityModal').modal()
             })
 
     //EDIT ACTIVITY VIEW
@@ -440,6 +440,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
             data: JSON.stringify(formData),
             contentType: 'application/json',
         })
+    })
 
 // SEARCH YELP
     var $yelpActivityBtn = $('#new-activity-yelp')
@@ -478,7 +479,7 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
             populate(res)
             //console.log(res)
         })
-
+    })
 
     function populate(items) {
         //console.log(items)
@@ -507,17 +508,19 @@ src="https://maps.googleapis.com/maps/api/js?key=AIzaSyAqnz4mGqJTVkiDhbWySMVzAUx
                 if(item.price) {
                     return $('<li>').text("Price: " + item.price)   
                 }
-            })
-        }
-        
-        $('body').on('click', '.select-button', function() {
-            var item = $(this).prev()
-            selectedPlace = item.text()
-            console.log(selectedPlace)
-            checkPlace(selectedPlace)
-            $('#yelpActivityModal').modal('hide')   
-            $('#newActivityModal').modal()
+            }
         })
+    }
+        
+        
+    $('body').on('click', '.select-button', function() {
+        var item = $(this).prev()
+        selectedPlace = item.text()
+        console.log(selectedPlace)
+        checkPlace(selectedPlace)
+        $('#yelpActivityModal').modal('hide')   
+        $('#newActivityModal').modal()
+    })
     
     $('body').on('click', '.select-button', function() {
         var place = $(this).prev()
