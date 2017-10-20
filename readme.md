@@ -14,12 +14,12 @@ Here at Sockaputa headquarters we attribute our success to us always taking a st
 - Cole Herzer ([coleherzer](https://github.com/coleherzer))
 - Philip Karz  ([philipkarz](https://github.com/philipkarz))
 - Jason Rouse  ([jrrouse88](https://github.com/jrrouse88))
+- ​
 
- 
+
 
 ## Technologies Used
 
-*(including outside APIs)*
 - HTML
 - CSS
 - JavaScript
@@ -29,29 +29,14 @@ Here at Sockaputa headquarters we attribute our success to us always taking a st
 - Yelp API
 - Google Maps API
 
-NPM's
-    "bcrypt-nodejs"
-    "body-parser"
-    "bootstrap-datepicker"
-    "connect-flash"
-    "connect-mongodb-session"
-    "cookie-parser"
-    "dotenv"
-    "ejs"
-    "express"
-    "express-ejs-layouts"
-    "express-session",
-    "method-override"
-    "mongoose"
-    "morgan"
-    "passport"
-    "passport-local"
-    "request"
-    "yargs"
-    "yelp-fusion"
+**NPM packages**
+bcrypt-nodejs, body-parser, bootstrap-datepicker, connect-flash, connect-mongodb-session, cookie-parser, dotenv, ejs, express, express-ejs-layouts, express-session, method-override, mongoose, morgan, passport, passport-local, request, yargs, yelp-fusion
+
+
 
 ## Approach Taken
-- Each day, all four of the Sockapoota members would assemble and take upon ourselves the necessary tasks of the day
+Each day, all four of the Sockapoota members would assemble and take upon ourselves the necessary tasks of the day
+
 1. We first created the models
 2. Created corresponding routes for CRUD
 3. Made the views
@@ -61,16 +46,15 @@ NPM's
 
 
 #### Division of Tasks
-Project Manager - Katie
-Scrum Master - Jason
-API's - Katie(Yelp) and Jason(Maps)
-Models - Phil
-CRUD for Trips User, and Activities - Phil and Cole
-Design - Cole (calendar, homepage) Katie (font, alltrips view)
-Views - Everyone
-Katie - Deck
-Presentation - Jason
-ReadMe - Phil
+- Project Manager - Katie
+- Scrum Master - Jason
+- API's - Katie(Yelp) and Jason(Maps)
+- Models - Phil
+- CRUD for Trips User, and Activities - Phil and Cole
+- Design - Cole (calendar, homepage) Katie (font, alltrips view)
+- Views - Everyone
+- Presentation Lead - Jason
+- ReadMe - Phil
 
 
 
@@ -83,34 +67,48 @@ ReadMe - Phil
 User Stories: https://trello.com/b/nZnU8Mt8/project-3-tripply
 
 Wireframes: 
-Home page: https://wireframe.cc/EEopei
-Main user page: https://wireframe.cc/k2EUyp
-All trips page: https://wireframe.cc/EcsXVW
+- Home page: https://wireframe.cc/EEopei
+- Main user page: https://wireframe.cc/k2EUyp
+- All trips page: https://wireframe.cc/EcsXVW
 
 Data Models: 
 
-Presentation Deck: 
 
 
 
 ## Unresolved Problems & Major Hurdles
 - Working with API's was a challenge
-- Creating, editing and deleting models through AJAX was more difficult
-than we thought
-- Dealing with github was insanity. The process of making sure noone elses code conflicted with eachothers was not easy
+
+- Creating, editing and deleting models through AJAX was more difficult than we thought
+
+- Dealing with github was insanity. The process of making sure no one elses code conflicted with eachothers was not easy
+
+  ​
 
 
 
 ## Future Features
 - A registered user should be able to search other APIs (in addition to Yelp), to populate activities, i.e. TripAdvisor
+
 - A registered user should be able to decide whether or not they want their trip to be public
+
 - When clicked into activity details, a user should be able to see a map of the location of the activity
+
 - When clicked into a trip, a user should be able to see weather for the location/time period of the trip
+
 - A user can rate their experience of the activities they do (1-5 stars)
+
 - A user can copy another users trip/activity to their itinerary
+
 - A user can upload pictures of thier dope trip
 
-#Shoutouts
+- [See our Trello Icebox for a full list](https://trello.com/b/nZnU8Mt8/project-3-tripply)
+
+  ​
+
+# Shoutouts
+
+
 
 ## Technical Requirements
 
