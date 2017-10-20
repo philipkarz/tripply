@@ -2,7 +2,8 @@
     <div class='row'>
         <div class='col-6'>
             <h1><%= trip.name %></h1>
-            <h1><a id="weatherlink" href="/weather/<%= trip.locale %>"><%= trip.locale %></a></h1>
+            <button><a id="weatherlink" href="/weather/<%= trip.locale %>">Get <%= trip.locale %> Forecast</a></button>
+            <h1><%= trip.locale %></h1>
         </div>
 
        <!-- Determines whether to show Edit/Add buttons (no unless the trip belongs to the current user) -->
