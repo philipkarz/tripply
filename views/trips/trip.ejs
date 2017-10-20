@@ -283,6 +283,25 @@ var globalActivityId
                 $('#editActivityDate').val(res.date)
                 $('#editActivityTime').val(res.time)
                 $('#editActivityDescription').val(res.description)
+                var addy = res.address
+                                
+                geocoder = new google.maps.Geocoder()
+                if(geocoder) {
+                    geocoder.geocode({
+                        'address': addy
+                    }, function(results, status) {
+                        if (status == google.maps.GeocoderStatus.OK) {
+                            address = results[0]
+                            //console.log(address)
+                            latitude = address.geometry.location.lat()
+                            longitude = address.geometry.location.lng()
+                            //console.log(latitude, longitude)
+    
+                            
+                        }
+                        $('#activityModal').modal()
+                    })
+                }
 
                 globalActivityId = activityId
             })
