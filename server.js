@@ -64,12 +64,14 @@ app.use(passport.session())
 app.use((req, res, next) => {
     app.locals.currentUser = req.user
     app.locals.loggedIn = !!req.user
+    app.locals.showFooter = true
     next()
 })
 
 app.get('/', (req, res) => {
     //res.render({message: "The root."})
-    res.render('../views/home')
+
+    res.render('../views/home', {showFooter: false})
 })
 
 //weather
