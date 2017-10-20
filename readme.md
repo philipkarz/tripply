@@ -4,7 +4,7 @@
 
 Here at Sockaputa headquarters we attribute our success to us always taking a step back and asking ourselves how can we improve the world. And Tripply was born. Tripply is designed to help users create itineraries for their vacations. In additiont it is fully scalable. To begin a user clicks on "Sign Up" to create an account. Once signed in a user will be directed to thier profile page. They can then create a trip, by clicking "Plan Trip". After filling out the necessary trip details, you will be directed to the trip page where they can then create new activities for that trip. You are given the option of either creating your own activity, or use a Yelp API to suggest possible activities in your area. Your activities will be organized by date and time. Once you have filled out your itinerary you are on your way to a productive, exciting, well earned vacation. Happy travels!
 
-[Check out Tripply]()
+[Check out Tripply](https://fathomless-brushlands-88760.herokuapp.com/)
 
 
 
@@ -51,14 +51,22 @@ NPM's
     "yelp-fusion"
 
 ## Approach Taken
-Here at Sockaputa headquarters we attribute our success to us always taking a step back and asking ourselves how can we improve the world. In additiont we want all our applications to be fully scalable.
+- Each day, all four of the Sockapoota members would assemble and take upon ourselves the necessary tasks of the day
+1. We first created the models
+2. Created corresponding routes for CRUD
+3. Made the views
+4. Incorporated API's
+5. Added CSS/Bootstrap 
+6. Got drunk and celebrated
+
 
 #### Division of Tasks
 Project Manager - Katie
 Scrum Master - Jason
 API's - Katie(Yelp) and Jason(Maps)
+Models - Phil
 CRUD for Trips User, and Activities - Phil and Cole
-Design - Cole
+Design - Cole (calendar, homepage) Katie (font, alltrips view)
 Views - Everyone
 Katie - Deck
 Presentation - Jason
@@ -75,6 +83,9 @@ ReadMe - Phil
 User Stories: https://trello.com/b/nZnU8Mt8/project-3-tripply
 
 Wireframes: 
+Home page: https://wireframe.cc/EEopei
+Main user page: https://wireframe.cc/k2EUyp
+All trips page: https://wireframe.cc/EcsXVW
 
 Data Models: 
 
@@ -86,7 +97,7 @@ Presentation Deck:
 - Working with API's was a challenge
 - Creating, editing and deleting models through AJAX was more difficult
 than we thought
-- 
+- Dealing with github was insanity. The process of making sure noone elses code conflicted with eachothers was not easy
 
 
 
