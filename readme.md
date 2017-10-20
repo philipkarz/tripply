@@ -75,8 +75,10 @@ Wireframes:
 - Home page: https://wireframe.cc/EEopei
 - Main user page: https://wireframe.cc/k2EUyp
 - All trips page: https://wireframe.cc/EcsXVW
-
-Data Models: https://ga-students.slack.com/files/U6GV09FK8/F7K3R5WCE/20171013_152815.jpg
+Models:
+https://imgur.com/Hry13A0
+ 
+<!-- Data Models: https://ga-students.slack.com/files/U6GV09FK8/F7K3R5WCE/20171013_152815.jpg -->
 
 
 
@@ -94,7 +96,7 @@ Data Models: https://ga-students.slack.com/files/U6GV09FK8/F7K3R5WCE/20171013_15
 
 
 ## Future Features
-- A registered user should be able to search other APIs (in addition to Yelp), to populate activities, i.e. TripAdvisor
+- A registered user should be able to search other APIs (in addition to Yelp), to populate activities, i.e. TripAdvisor, Expedia
 
 - A registered user should be able to decide whether or not they want their trip to be public
 
